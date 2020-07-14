@@ -1,0 +1,8 @@
+.audiobox {
+    display: flex;
+    align-items: center;
+}
+.audio {
+    height: 30px;
+    width: auto;
+}

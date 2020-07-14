@@ -1,0 +1,7 @@
+.row-article {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin: 3px;
+    justify-content: space-around;
+}

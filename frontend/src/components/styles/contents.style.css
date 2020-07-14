@@ -1,0 +1,9 @@
+.content {
+    display: flex;
+    align-items: center;
+}
+
+.read {
+    height: 30px;
+    width: auto;
+}
