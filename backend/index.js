@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-const port = 3001;
 
 var database = require('./controllers/database.controller');
 
@@ -14,11 +13,17 @@ mongoose
 
 mongoose.connection.once("open", () => console.log("Connect Database Successfully!"));
 
+app.all('/', function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next()
+});
 
-
-app.get("/", (req, res) => res.send("Sang!"));
+app.get("/", (req, res) => res.send("Backend MRC is running!"));
 
 app.get("/articles", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
     database.GetAllArticles(req, res);
 });
 
@@ -30,6 +35,6 @@ app.get("/contents", (req, res) => {
     database.GetContents(req, res);
 });
 
-app.listen(port, () =>
-  console.log(`Backend listening at http://localhost:${port}`)
+app.listen(process.env.PORT, () =>
+  console.log(`Backend listening at http://localhost:${process.env.PORT}`)
 );

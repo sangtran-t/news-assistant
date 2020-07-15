@@ -1,10 +1,24 @@
 var Article = require('../models/article.model');
 
 module.exports.GetAllArticles = async (req, res) => {
+    console.log('Getting all articles');
+    results = [];
+    var preprocess = (object) => {
+        results.push({
+            id: object['id'],
+            title: object['title'],
+            link: object['link'],
+            description: object['description'].join('. '),
+            images: object['images'],
+            time: object['time_created']
+        });
+    }
     try {
         const filter = {};
-        const all = await Article.findOne(filter);
-        res.send(all);
+        const articles = await Article.find(filter).limit(2);
+        articles.forEach(preprocess);
+        
+        res.send(JSON.stringify(results));
     } catch (error) {
         console.log(error);
     }

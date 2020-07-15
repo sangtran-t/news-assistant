@@ -12,7 +12,7 @@ var articleSchema = new mongoose.Schema({
         required: true
     },
     tags: {
-        type: String,
+        type: Array,
         default: "",
         required: true
     },
@@ -27,7 +27,7 @@ var articleSchema = new mongoose.Schema({
         required: true
     },
     description: {
-        type: String,
+        type: Array,
         default: "",
         required: true
     },
