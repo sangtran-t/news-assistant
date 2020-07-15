@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './App.css';
-import RawArticle from './components/rowarticle.component';
+import ArticlesContainer from "./components/articlescontainer.component";
 
 function App() {
   return (
@@ -11,22 +11,7 @@ function App() {
           <fieldset>
             <legend>Danh sách</legend>
             <div className="contents">
-              <RawArticle />
-              <RawArticle />
-              <RawArticle />
-              <RawArticle />
-              <RawArticle />
-              <RawArticle />
-              <RawArticle />
-              <RawArticle />
-              <RawArticle />
-              <RawArticle />
-              <RawArticle />
-              <RawArticle />
-              <RawArticle />
-              <RawArticle />
-              <RawArticle />
-              <RawArticle />
+              <ArticlesContainer/>
             </div>
           </fieldset>
         </div>
