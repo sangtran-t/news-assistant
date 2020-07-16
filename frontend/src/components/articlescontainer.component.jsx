@@ -13,22 +13,22 @@ class ArticlesContainer extends Component {
     }
     
     componentDidMount() {
-        fetch("https://api-mrc.herokuapp.com/articles?limit=10")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                this.setState({
-                    isLoaded: true,
-                    articles: result,
-                });
-                },
-                (error) => {
-                this.setState({
-                    isLoaded: true,
-                    error,
-                });
-                }
-            );
+        fetch("http://localhost:1337/articles?limit=10")
+          .then((res) => res.json())
+          .then(
+            (result) => {
+              this.setState({
+                isLoaded: true,
+                articles: result,
+              });
+            },
+            (error) => {
+              this.setState({
+                isLoaded: true,
+                error,
+              });
+            }
+          );
     }
 
     render() {

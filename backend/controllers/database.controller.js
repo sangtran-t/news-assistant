@@ -1,7 +1,6 @@
 var Article = require('../models/article.model');
 
 module.exports.GetAllArticles = async (req, res) => {
-    console.log('Getting articles');
     results = [];
     var preprocess = (object) => {
         results.push({
@@ -18,11 +17,14 @@ module.exports.GetAllArticles = async (req, res) => {
         const filter = {};
         var articles={};
         if (limit) {
+            console.log('Getting '+limit+' articles');
             articles = await Article.find(filter).limit(limit);
         }
         else {
+            console.log('Getting all articles');
             articles = await Article.find(filter).limit(0);
         }
+        console.log('Preprocessing data...');
         articles.forEach(preprocess);
         res.send(JSON.stringify(results));
     } catch (error) {

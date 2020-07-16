@@ -8,7 +8,7 @@
 }
 
 .title {
-    font-family: OpenSans;
+    font-family: Quicksand;
     font-size: medium;
     font-weight: bold;
     margin: 3px;
@@ -20,7 +20,8 @@
 }
 
 .description {
-    font-family: Roboto;
+    font-family: Quicksand;
+    font-size: small;
     margin: 3px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -48,4 +49,11 @@
     font-style: normal;
     font-weight: normal;
     src: url('./fonts/OpenSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./fonts/Quicksand-VariableFont_wght.ttf');
 }

@@ -3,25 +3,27 @@ import './styles/audio.style.css';
 import speaking from '../images/speaking.png';
 
 class Audio extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            // play: false,
-        }
+            play: false,
+        };
     }
     clickSpeaking = () => {
         console.log('Speaking...');
-        fetch("https://api-mrc.herokuapp.com/audio?id=" + this.props.id)
-            .then(res => res.json())
+        fetch("http://localhost:1337/audio?id=" + this.props.id)
+            .then((res) => res.json())
             .then((result) => {
-                return '<audio controls="controls" autobuffer="autobuffer" autoplay="autoplay" >< source src="data:audio/wav;base64,'+result['audio']+'" /></audio>'
+                return (
+                '<audio id="audio-control" controls="controls" autobuffer="autobuffer" autoplay="autoplay" >< source src="data:audio/wav;base64,' + result["audio"] +'" /></audio>'
+                );
             });
         console.log('Done');
     }
     render() {
         return (
             <div className="audiobox">
-                <img className="audio" src={speaking} alt="Speaking" onClick={this.clickSpeaking}/>
+                <img className="audio" src={speaking} alt="Speaking" onClick={this.clickSpeaking} />
             </div>
         );
     }
