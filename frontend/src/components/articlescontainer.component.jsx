@@ -14,21 +14,21 @@ class ArticlesContainer extends Component {
     
     componentDidMount() {
         fetch("http://localhost:1337/articles?limit=10")
-          .then((res) => res.json())
-          .then(
-            (result) => {
-              this.setState({
-                isLoaded: true,
-                articles: result,
-              });
-            },
-            (error) => {
-              this.setState({
-                isLoaded: true,
-                error,
-              });
-            }
-          );
+            .then((res) => res.json())
+            .then(
+                (result) => {
+                this.setState({
+                    isLoaded: true,
+                    articles: result,
+                });
+                },
+                (error) => {
+                this.setState({
+                    isLoaded: true,
+                    error,
+                });
+                }
+            );
     }
 
     render() {

@@ -67,6 +67,7 @@ body {
 .contents {
   height: 80vh;
   overflow: auto;
+  padding: 5px 20px;
 }
 
 fieldset {

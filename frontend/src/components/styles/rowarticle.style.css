@@ -3,5 +3,5 @@
     display: flex;
     flex-direction: row;
     margin: 3px;
-    justify-content: space-around;
+    justify-content: flex-start;
 }

@@ -16,9 +16,8 @@ function App() {
           </fieldset>
         </div>
         <div className="section right">
-          < fieldset >
+          <fieldset>
             <legend>About</legend>
-
           </fieldset>
         </div>
       </div>

@@ -4,7 +4,7 @@
     height: 5em;
     margin: 2px;
     padding: 2px;
-    width: 80%;
+    width: -webkit-fill-available;
 }
 
 .title {
