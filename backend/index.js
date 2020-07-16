@@ -19,7 +19,7 @@ app.all('/', function (req, res, next) {
   next()
 });
 
-app.get("/", (req, res) => res.send("Backend MRC is running!"));
+app.get("/", (req, res, next) => res.send("Backend MRC is running!"));
 
 app.get("/articles", (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -28,10 +28,14 @@ app.get("/articles", (req, res) => {
 });
 
 app.get("/audio", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
     database.GetAudio(req, res);
 });
 
 app.get("/contents", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
     database.GetContents(req, res);
 });
 

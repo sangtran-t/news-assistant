@@ -1,7 +1,7 @@
 var Article = require('../models/article.model');
 
 module.exports.GetAllArticles = async (req, res) => {
-    console.log('Getting all articles');
+    console.log('Getting articles');
     results = [];
     var preprocess = (object) => {
         results.push({
@@ -14,10 +14,16 @@ module.exports.GetAllArticles = async (req, res) => {
         });
     }
     try {
+        var limit = Number(req.query.limit);
         const filter = {};
-        const articles = await Article.find(filter).limit(2);
+        var articles={};
+        if (limit) {
+            articles = await Article.find(filter).limit(limit);
+        }
+        else {
+            articles = await Article.find(filter).limit(0);
+        }
         articles.forEach(preprocess);
-        
         res.send(JSON.stringify(results));
     } catch (error) {
         console.log(error);
@@ -29,7 +35,7 @@ module.exports.GetAudio = async (req, res) => {
     console.log('Getting audio data for article '+id);
     try {
         audio = await Article.findOne().select('audio').where('id').equals(id);
-        res.send('<audio controls="controls" autobuffer="autobuffer" autoplay="autoplay"> <source src = "data:audio/wav;base64,'+audio['audio']+'" /></audio>');
+        res.send(JSON.stringify(audio));
     } catch (error) {
         console.log(error);
     }
@@ -45,3 +51,5 @@ module.exports.GetContents = async (req, res) => {
         console.log(error);
     }
 }
+
+{/* <audio controls = "controls" autobuffer = "autobuffer" autoplay = "autoplay" > < source src = "data:audio/wav;base64,'+audio['audio']+'" /> </audio>' */}
