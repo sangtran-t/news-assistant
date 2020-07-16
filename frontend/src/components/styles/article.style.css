@@ -6,3 +6,46 @@
     padding: 2px;
     width: 80%;
 }
+
+.title {
+    font-family: OpenSans;
+    font-size: medium;
+    font-weight: bold;
+    margin: 3px;
+    overflow: hidden;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.description {
+    font-family: Roboto;
+    margin: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+@font-face {
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./fonts/Comfortaa-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./fonts/OpenSans-Regular.ttf');
+}

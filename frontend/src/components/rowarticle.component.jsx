@@ -6,12 +6,12 @@ import Audio from './audio.component';
 
 import './styles/rowarticle.style.css'
 
-const RawArticle = () => {
+const RawArticle = (article) => {
     return (
         <div className="row-article">
-            <Article/>
-            <Audio/>
-            <Content/>
+            <Article {...article}/>
+            <Audio {...article}/>
+            <Content {...article}/>
         </div>
     )
 }
