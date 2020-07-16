@@ -7,23 +7,40 @@ class Audio extends Component {
         super(props);
         this.state = {
             play: false,
+            audioElem: null
         };
     }
+
     clickSpeaking = () => {
-        console.log('Speaking...');
-        fetch("http://localhost:1337/audio?id=" + this.props.id)
-            .then((res) => res.json())
-            .then((result) => {
-                return (
-                '<audio id="audio-control" controls="controls" autobuffer="autobuffer" autoplay="autoplay" >< source src="data:audio/wav;base64,' + result["audio"] +'" /></audio>'
-                );
-            });
-        console.log('Done');
+        if (!this.state.play) {
+            console.log('Speaking...');
+            fetch("http://localhost:1337/audio?id=" + this.props.id)
+                .then((res) => res.json())
+                .then((result) => {
+                    var encode = "data:audio/wav;base64," + result['audio'];
+                    this.setState({
+                        play: !this.state.play,
+                        audioElem: (
+                            <audio id="audio-control" controls="controls"
+                                    autobuffer="autobuffer" autoPlay="autoPlay">
+                                    <source src={encode} />
+                            </audio>
+                        ),
+                    });
+                });
+        } else {
+            console.log("Turn off speaking!");
+            this.setState({
+                play: !this.state.play,
+                audioElem: null
+            })
+        }
     }
     render() {
         return (
-            <div className="audiobox">
+            <div id = "audio-container" className = "audiobox" >
                 <img className="audio" src={speaking} alt="Speaking" onClick={this.clickSpeaking} />
+                {this.state.audioElem}
             </div>
         );
     }
