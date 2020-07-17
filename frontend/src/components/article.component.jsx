@@ -3,15 +3,10 @@ import React, { Component } from 'react';
 import './styles/article.style.css';
 import defaulImage from '../images/default.jpg';
 class Article extends Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            id: "",
-            image: "",
-            title: "",
-            description: "",
-            contents: "",
-            audio: "",
+            
         }
     }
     render() {

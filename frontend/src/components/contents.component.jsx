@@ -11,26 +11,10 @@ class Contents extends Component {
             contents: null,
         }
     }
-    onClick = () => {
-        fetch("http://localhost:1337/contents?id=" + this.props.id)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.table(result);
-                    // this.setState({
-                    //     isLoaded: true,
-                    //     content: result['paragraphs_clear']
-                    // })
-                },
-                (error) => {
-                    console.table(error);
-                }
-            )
-    }
     render() {
         return (
-            <div className="content" role="button" onClick={this.onClick}>
-                <div className="tootip-read">
+            <div className="content" role="button" onClick={()=>this.props.data.callback(this.props.data.article.id)}>
+                <div className="tootip">
                     <img className="read" src={reading} alt="Reading" />
                     <span className="tooltiptext">Reading</span>
                 </div>

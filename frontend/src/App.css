@@ -64,10 +64,17 @@ body {
   height: 100vh;
 }
 
-.contents {
+.contents, .detail-contents {
   height: 80vh;
   overflow: auto;
   padding: 5px 20px;
+  text-align: justify;
+}
+
+.detail-contents {
+  display: block;
+  justify-content: center;
+  align-items: center;
 }
 
 fieldset {
@@ -78,9 +85,19 @@ fieldset {
 
 legend {
   font-family: Comfortaa;
-  font-weight: normal;
+  font-weight: bold;
 }
 
+body{
+  font-family: Quicksand;
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./components/styles/fonts/Quicksand-VariableFont_wght.ttf');
+}
 @font-face {
   font-family: 'Comfortaa';
   font-style: normal;

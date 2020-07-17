@@ -30,8 +30,8 @@
 }
 
 .tooltip, .tootip-read {
-    position: relative;
     display: inline-block;
+    position: relative;
 }
 .tootip .tooltiptext {
     font-size: small;
@@ -45,7 +45,7 @@
     position: absolute;
     z-index: 1;
     bottom: 74%;
-    left: 85.5%;
+    left: 89%;
     transition-delay: 2s;
 }
 

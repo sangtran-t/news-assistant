@@ -8,20 +8,3 @@
     height: 30px;
     width: auto;
 }
-
-.tootip-read .tooltiptext {
-    font-size: small;
-    visibility: hidden;
-    width: auto;
-    background-color: #F0F2F5;
-    color: #5c5c5c;
-    text-align: center;
-    border-radius: 20px;
-    padding: 0px 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 131%;
-    left: 0%;
-    transition-delay: 2s;
-
-}

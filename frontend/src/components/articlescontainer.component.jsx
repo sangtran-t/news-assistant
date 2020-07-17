@@ -32,7 +32,7 @@ class ArticlesContainer extends Component {
     }
 
     render() {
-        const { error, isLoaded, articles } = this.state;
+        const { error, isLoaded, articles} = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -57,7 +57,7 @@ class ArticlesContainer extends Component {
             return (
                 <div>
                     {articles.map((article) => {
-                        return <RawArticle key={article.id} {...article} />
+                        return <RawArticle key={article.id} data={{ article: article, callback: this.props.data.fetchContents.bind(this) }}/>
                     })}
                 </div>
             );
