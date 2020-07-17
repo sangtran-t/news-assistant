@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './styles/article.style.css';
-
+import defaulImage from '../images/default.jpg';
 class Article extends Component{
     constructor() {
         super();
@@ -20,8 +20,8 @@ class Article extends Component{
                 <table>
                     <tbody>
                         <tr>
-                            <td rowSpan="2" width="15%">
-                                <div className="image"><img src={this.props.image} alt=""/></div>
+                            <td rowSpan="2" width="160px">
+                                <div className="image"><img className="image" src={this.props.image ? this.props.image : defaulImage} alt=""/></div>
                             </td>
                             <td>
                                 <div className="title">{this.props.title}</div>

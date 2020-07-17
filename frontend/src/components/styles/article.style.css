@@ -1,10 +1,16 @@
 .article {
     border-radius: 10px;
-    background-color: aliceblue;
-    height: 5em;
+    background-color: #F0F2F5;
+    height: 6em;
     margin: 2px;
     padding: 2px;
     width: -webkit-fill-available;
+    box-shadow: 5px 6px 10px lightgrey;
+    transition: transform .9s;
+    transition-delay: .5s;
+}
+.article:hover {
+    transform: scale(1.06);
 }
 
 .title {
@@ -29,6 +35,15 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
 }
+
+.image {
+    align-items: center;
+    width: 95%;
+    height:100px;
+    border-radius: 8px;
+    margin: -10px 5px;
+}
+
 
 @font-face {
     font-family: 'Comfortaa';

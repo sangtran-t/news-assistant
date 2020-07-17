@@ -2,6 +2,9 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    margin: 3px;
-    justify-content: flex-start;
+    margin: 2em .2em;
+    justify-content: center;
+    height: auto;
 }
+
+

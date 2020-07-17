@@ -16,7 +16,7 @@ class Audio extends Component {
     clickSpeaking = () => {
         this.setState({
             audioElem: (
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="32px" height="32px" viewBox="0 0 128 128">
+                <svg id="audio-loading" xmlns="http://www.w3.org/2000/svg" version="1.0" width="32px" height="32px" viewBox="0 0 128 128">
                     <rect x="0" y="0" width="100%" height="100%" fill="#FFFFFF" /><g>
                     <circle cx="16" cy="64" r="16" fill="#000000" fillOpacity="1" />
                     <circle cx="16" cy="64" r="14.344" fill="#000000" fillOpacity="1" transform="rotate(45 64 64)" />
@@ -68,8 +68,11 @@ class Audio extends Component {
     }
     render() {
         return (
-            <div id = "audio-container" className = "audiobox" >
-                <img className="audio" src={speaking} alt="Speaking" onClick={this.clickSpeaking} />
+            <div id="audio-container" className="audiobox" >
+                <div className="tootip">
+                    <img className="audio" src={speaking} alt="Speaking" onClick={this.clickSpeaking}/>
+                    <span className="tooltiptext">Speaking</span>
+                </div>
                 {this.state.audioElem}
             </div>
         );
