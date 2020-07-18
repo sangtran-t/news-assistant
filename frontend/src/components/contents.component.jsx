@@ -13,7 +13,7 @@ class Contents extends Component {
     }
     render() {
         return (
-            <div className="content" role="button" onClick={()=>this.props.data.callback(this.props.data.article.id)}>
+            <div className="content" role="button" onClick={() => this.props.data.fetchContents(this.props.data.article.id)}>
                 <div className="tootip">
                     <img className="read" src={reading} alt="Reading" />
                     <span className="tooltiptext">Reading</span>

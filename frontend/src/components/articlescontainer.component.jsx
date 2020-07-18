@@ -6,31 +6,47 @@ class ArticlesContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            numOfLoading:10,
             error: null,
             isLoaded: false,
             articles: []
         };
     }
     
-    componentDidMount() {
-        fetch("http://localhost:1337/articles?limit=10")
+    calNumberOfLoading = (number) => {
+        return number + 10
+    }
+
+    loadData = (numberOfLoading) => {
+        fetch("http://localhost:1337/articles?limit=" + numberOfLoading)
             .then((res) => res.json())
             .then(
                 (result) => {
-                this.setState({
-                    isLoaded: true,
-                    articles: result,
-                });
+                    this.setState({
+                        articles: result,
+                        isLoaded: true,
+                    });
                 },
                 (error) => {
-                this.setState({
-                    isLoaded: true,
-                    error,
-                });
+                    this.setState({
+                        isLoaded: true,
+                        error,
+                    });
                 }
             );
     }
 
+    componentDidMount() {
+        this.loadData(this.state.numOfLoading)
+    };
+    loadMore(currentArticles) {
+        var nextArticles = this.calNumberOfLoading(currentArticles);
+        this.setState({
+            numOfLoading:nextArticles,
+        })
+        this.loadData(nextArticles);
+    };
+    
     render() {
         const { error, isLoaded, articles} = this.state;
         if (error) {
@@ -57,10 +73,10 @@ class ArticlesContainer extends Component {
             return (
                 <div>
                     {articles.map((article) => {
-                        return <RawArticle key={article.id} data={{ article: article, callback: this.props.data.fetchContents.bind(this) }}/>
+                        return <RawArticle key={article.id} data={{ article: article, fetchContents: this.props.data.fetchContents.bind(this) }}/>
                     })}
                     <div id="loadmore">
-                        <div id="sub-loadmore"><span></span><p>More</p></div>
+                        <div id="sub-loadmore"><span onClick={()=>this.loadMore(this.state.numOfLoading)}></span><p>More</p></div>
                     </div>
                 </div>
             );

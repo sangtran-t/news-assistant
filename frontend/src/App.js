@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
 import './App.css';
-import ArticlesContainer from "./components/articlescontainer.component";
+import ArticlesContainer from './components/articlescontainer.component';
+import Assistant from './components/assistant.component';
 
 class App extends Component {
   constructor() {
@@ -73,6 +74,7 @@ class App extends Component {
                 {this.state.contents}
               </div>
             </fieldset>
+            <Assistant/>
           </div>
         </div>
       </div>

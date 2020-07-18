@@ -1,0 +1,70 @@
+#assistant {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 15vh;
+    width: auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 3px;
+    border: 1px solid #DCDCDC;
+    padding: 0px 30px;
+}
+
+#assistant img {
+    height: 40px;
+    width: auto;
+    background-color: #DCDCDC;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 20px lightgrey;
+    margin-left: 10px;
+}
+
+#assistant img {
+    transition: transform .5s, opacity .5s ease;
+    transition-delay: .1s;
+    opacity: .8;
+    animation: wiggle 0.5s;
+    animation-iteration-count: infinite;
+}
+
+#assistant img:hover {
+    transform: scale(1.3);
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+    opacity: 1;
+}
+
+.sendmessage {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+}
+.sendmessage input {
+    font-family: Quicksand;
+    width: 100%;
+    outline: none;
+    background-color: #F0F2F5;
+    border: none;
+    border-radius: 30px;
+    padding: 10px;
+    height: 22px;
+    box-shadow: 0px 0px 20px lightgrey;
+}
+
+.sendmessage svg {
+    margin: 2px 3px;
+    fill: #bec2c9;
+    opacity: .5;
+}
+
+.sendmessage svg:hover {
+    transform: scale(1.1);
+    opacity: 1;
+    fill: #000000;
+    transition: transform 1s, opacity 2s ease
+}
+

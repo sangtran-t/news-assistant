@@ -28,7 +28,7 @@ class RawArticle extends Component{
             <div className="row-article">
                 <Article {...this.state.article}/>
                 <Audio {...this.state.article}/>
-                <Content data={{ article: this.state.article, callback: this.props.data.callback}}/>
+                <Content data={{ article: this.state.article, fetchContents: this.props.data.fetchContents}}/>
             </div>
         )
     }

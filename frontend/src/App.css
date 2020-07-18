@@ -1,7 +1,10 @@
-.App {
-  margin: 0;
-  padding: 2%;
+body {
   background-color: #F0F2F5;
+}
+.App {
+  margin: 50px;
+  /* padding: 2%; */
+  /* background-color: #F0F2F5; */
   height: 100vh;
   width:auto;
 } 
@@ -43,6 +46,7 @@
 
 body {
   overflow: hidden;
+  font-family: Quicksand;
 }
 
 .main-container {
@@ -65,10 +69,17 @@ body {
 }
 
 .contents, .detail-contents {
-  height: 80vh;
   overflow: auto;
   padding: 5px 20px;
   text-align: justify;
+}
+
+.contents {
+  height: 80vh;
+}
+
+.detail-contents {
+  height: 64vh;
 }
 
 #content-loading {
@@ -105,4 +116,55 @@ body{
   font-style: normal;
   font-weight: normal;
   src: url('./components/styles/fonts/Comfortaa-VariableFont_wght.ttf');
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+@keyframes shake-two {
+  10%, 90% {transform: translate3d(-1px, 0, 0);}
+  20%, 80% {transform: translate3d(2px, 0, 0);}
+  30%, 50%, 70% {transform: translate3d(-4px, 0, 0);}
+  40%, 60% {transform: translate3d(4px, 0, 0);}
+}
+
+
+@keyframes shake-three {
+  0% { transform: skewX(-15deg); }
+  5% { transform: skewX(15deg); }
+  10% { transform: skewX(-15deg); }
+  15% { transform: skewX(15deg); }
+  20% { transform: skewX(0deg); }
+  100% { transform: skewX(0deg); }  
+}
+
+
+@-webkit-keyframes shake-four {
+  from {
+    -webkit-transform: rotate(10deg);
+  }
+
+  to {
+    -webkit-transform-origin: center center;
+    -webkit-transform: rotate(-10deg);
+  }
+}
+
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    60% { transform: rotate(0deg); }
+    70% { transform: rotate(15deg); }
+    80% { transform: rotate(-15deg); }
+  100% { transform: rotate(0deg); }
 }
