@@ -70,7 +70,7 @@ class Audio extends Component {
         return (
             <div id="audio-container" className="audiobox" >
                 <div className="tootip">
-                    <img className="audio" src={speaking} alt="Speaking" onClick={this.clickSpeaking}/>
+                    <img className="audio" src={speaking} alt="Speaking" onClick={this.clickSpeaking} />
                     <span className="tooltiptext">Speaking</span>
                 </div>
                 {this.state.audioElem}

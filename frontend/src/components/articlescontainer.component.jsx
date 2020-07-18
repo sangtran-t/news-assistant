@@ -59,6 +59,9 @@ class ArticlesContainer extends Component {
                     {articles.map((article) => {
                         return <RawArticle key={article.id} data={{ article: article, callback: this.props.data.fetchContents.bind(this) }}/>
                     })}
+                    <div id="loadmore">
+                        <div id="sub-loadmore"><span></span><p>More</p></div>
+                    </div>
                 </div>
             );
         }
