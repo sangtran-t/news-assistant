@@ -34,6 +34,7 @@
     animation: shake 0.5s;
     animation-iteration-count: infinite;
     opacity: 1;
+    cursor: pointer;
 }
 
 .sendmessage {
@@ -43,6 +44,28 @@
     justify-content: center;
     align-items: center;
 }
+
+.sendmessage:hover {
+    cursor: pointer;
+}
+
+#dynamic {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#dynamic .sendmessage {
+    width: 100%;
+    animation: slide 5s;
+    animation-delay: 1ms;
+}
+
+@keyframes slide {
+  from {width: 25%;}
+  to {width: 100%;}
+}
+
 .sendmessage input {
     font-family: Quicksand;
     width: 100%;
@@ -66,5 +89,43 @@
     opacity: 1;
     fill: #000000;
     transition: transform 1s, opacity 2s ease
+}
+
+
+#sayhello {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    background: #F0F2F5;
+    text-align: center;
+    margin: 0pc 20px;
+    font-weight: bold;
+    box-shadow: 0px 0px 20px lightgrey;
+    animation: slide 5s infinite;
+    animation-delay: 1s;
+}
+
+#sayhello:after {
+    content: "";
+    position: absolute;
+    left: -20px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 25px solid #ffffff;
+    border-top: 25px solid #F0F2F5;
+    border-bottom: 25px solid #F0F2F5;
+}
+
+#sayhello:before {
+    content: "";
+    position: absolute; 
+    right: -25px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 25px solid #F0F2F5;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
 }
 

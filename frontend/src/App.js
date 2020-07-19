@@ -11,8 +11,17 @@ class App extends Component {
       nameLegend:"GIỚI THIỆU",
       error: null,
       isLoaded: false,
-      contents: "TRẦN THANH SANG"
+      contents: "TRẦN THANH SANG",
+      activeArticle: null,
+      currentPlaying:null
     };
+  }
+
+  getArticleCurrentPlaying = (articleId) => {
+    console.log("Current playing "+articleId);
+    this.setState({
+      currentPlaying: articleId,
+    })
   }
 
   fetchContents = (articleId) => {
@@ -42,7 +51,8 @@ class App extends Component {
           this.setState({
               isLoaded: true,
               contents: result['paragraphs_clear'],
-              nameLegend:"NỘI DUNG BÀI ĐỌC"
+              nameLegend: "NỘI DUNG BÀI ĐỌC",
+              activeArticle:articleId
           })
         },
         (error) => {
@@ -63,7 +73,13 @@ class App extends Component {
             <fieldset>  
               <legend>DANH SÁCH BÀI VIẾT</legend>
               <div className="contents">
-                <ArticlesContainer data={{ fetchContents: this.fetchContents.bind(this) }} />
+                < ArticlesContainer data = {
+                  {
+                    fetchContents: this.fetchContents.bind(this),
+                    getArticleCurrentPlaying:this.getArticleCurrentPlaying.bind(this)
+                  }
+                }
+                />
               </div>
             </fieldset>
           </div>
@@ -74,7 +90,12 @@ class App extends Component {
                 {this.state.contents}
               </div>
             </fieldset>
-            <Assistant/>
+            <Assistant data={
+              {
+                activeArticle: this.state.activeArticle,
+                currentPlaying: this.state.currentPlaying
+              }
+            } />
           </div>
         </div>
       </div>

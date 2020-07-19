@@ -20,15 +20,19 @@ class RawArticle extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            article:this.props.data.article
+            
         }
     }
     render() {
         return (
             <div className="row-article">
-                <Article {...this.state.article}/>
-                <Audio {...this.state.article}/>
-                <Content data={{ article: this.state.article, fetchContents: this.props.data.fetchContents}}/>
+                <Article {...this.props.data.article}/>
+                <Audio data={
+                    {
+                        article: this.props.data.article,
+                        getArticleCurrentPlaying: this.props.data.getArticleCurrentPlaying
+                    }} />
+                <Content data={{ article: this.props.data.article, fetchContents: this.props.data.fetchContents}}/>
             </div>
         )
     }

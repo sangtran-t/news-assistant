@@ -73,7 +73,13 @@ class ArticlesContainer extends Component {
             return (
                 <div>
                     {articles.map((article) => {
-                        return <RawArticle key={article.id} data={{ article: article, fetchContents: this.props.data.fetchContents.bind(this) }}/>
+                        return <RawArticle key={article.id} data={
+                            {
+                                article: article,
+                                fetchContents: this.props.data.fetchContents.bind(this),
+                                getArticleCurrentPlaying: this.props.data.getArticleCurrentPlaying.bind(this)
+                            }
+                        } />
                     })}
                     <div id="loadmore">
                         <div id="sub-loadmore"><span onClick={()=>this.loadMore(this.state.numOfLoading)}></span><p>More</p></div>

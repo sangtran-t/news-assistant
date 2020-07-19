@@ -33,6 +33,7 @@
 .audio:hover, .read:hover{
     transform: scale(1.5);
     opacity: 1;
+    cursor: pointer;
 }
 
 .tooltip, .tootip-read {

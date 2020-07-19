@@ -47,6 +47,10 @@
     
 }
 
+#loadmore div span {
+    cursor: pointer;
+}
+
 /* .audio {
     animation: shake .5s;
     animation-delay: 1s;
