@@ -6,7 +6,7 @@ class ArticlesContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            numOfLoading:10,
+            numOfLoading:20,
             error: null,
             isLoaded: false,
             articles: []

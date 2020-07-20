@@ -1,6 +1,3 @@
-body {
-  background-color: #F0F2F5;
-}
 .App {
   margin: 0px;
   height: 100%;
@@ -9,6 +6,7 @@ body {
 
 body {
   /* overflow: hidden; */
+  background-color: #F0F2F5;
   font-family: Quicksand;
 }
 
@@ -26,13 +24,20 @@ body {
 }
 
 .menubar {
-  /* position: relative; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
   width: 90px;
   background-color: white;
   margin: 10px 20px 0px 0px;
   height: auto;
-  box-shadow: 2px 2px 20px lightgrey;
   overflow: auto;
+  box-shadow: 2px 2px 20px lightgrey;
+}
+
+.top{
+  
 }
 .nav:before {
   content: "";
@@ -57,7 +62,7 @@ body {
 
 .contents, .detail-contents {
   overflow: auto;
-  padding: 5px 20px;
+  padding: 5px 10px;
   text-align: justify;
 }
 
@@ -68,6 +73,7 @@ body {
 .detail-contents {
   height: 64vh;
 }
+
 
 #content-loading {
   height: 100%;
@@ -86,10 +92,7 @@ fieldset {
 legend {
   font-weight: bold;
   font-size: smaller;
-}
-
-body{
-  font-family: Quicksand;
+  color: grey;
 }
 
 .copyright{
@@ -127,7 +130,7 @@ body{
   cursor: pointer;
   transform: scale(1.5);
   opacity: 1;
-  transition: transform .5s, opacity 2s ease
+  transition: transform .5s, opacity .5s ease;
 }
 
 

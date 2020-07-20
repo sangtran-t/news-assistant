@@ -10,7 +10,7 @@
     transition-delay: .5s;
 }
 .article:hover {
-    transform: scale(1.06);
+    transform: scale(1.05);
 }
 
 .title {
@@ -43,18 +43,3 @@
     border-radius: 8px;
     margin: -10px 5px;
 }
-
-
-/* @font-face {
-    font-family: 'Comfortaa';
-    font-style: normal;
-    font-weight: normal;
-    src: url('./fonts/Comfortaa-VariableFont_wght.ttf');
-}
-
-@font-face {
-    font-family: 'Quicksand';
-    font-style: normal;
-    font-weight: normal;
-    src: url('./fonts/Quicksand-VariableFont_wght.ttf');
-} */

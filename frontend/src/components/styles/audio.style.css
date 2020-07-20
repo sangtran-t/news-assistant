@@ -12,10 +12,10 @@
 
 #audio-control,
 #audio-loading {
-    margin: 0px 5px;
+    margin: 0px 5px 0px 2px;
     outline: none;
     height: 33px;
-    width: 240px;
+    width: 200px;
 }
 
 .audio, .read {
@@ -59,6 +59,21 @@
 .tootip:hover .tooltiptext,
 .tootip-read:hover .tooltiptext {
     visibility: visible;
+}
+
+audio::-webkit-media-controls-panel {
+    padding: 0px;
+}
+
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-timeline,
+audio::-webkit-media-controls-volume-slider-container,
+audio::-webkit-media-controls-volume-slider,
+audio::-webkit-media-controls-mute-button {
+    margin: 0px;
+}
+audio::-webkit-media-controls-timeline{
+    padding: 5px;
 }
 /* .audio:hover {
     animation: shake 0.5s;
