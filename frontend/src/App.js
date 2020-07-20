@@ -3,6 +3,15 @@ import React, { Component } from 'react';
 import './App.css';
 import ArticlesContainer from './components/articlescontainer.component';
 import Assistant from './components/assistant.component';
+import Navigation from './components/topbar.component';
+
+import automaticcontrast from './images/automatic-contrast.svg';
+import database from './images/database.svg';
+import setting from './images/setting.svg';
+import online from './images/online.svg';
+import rating from "./images/rating.svg";
+import address from './images/address.svg';
+import info from './images/info.svg';
 
 class App extends Component {
   constructor() {
@@ -68,7 +77,31 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Navigation/>
         <div className="main-container" >
+          <div className="section menubar">
+            <div className="menu-icons setting">
+                <img src={setting} alt="Setting"/>
+            </div>
+            <div className="menu-icons online">
+                <img src={online} alt="Online"/>
+            </div>
+            <div className="menu-icons database">
+                <img src={database} alt="Database"/>
+            </div>
+            <div className="menu-icons rating">
+                <img src={rating} alt="Rating"/>
+            </div>
+            <div className="menu-icons address">
+                <img src={address} alt="Address"/>
+            </div>
+            <div className="menu-icons automaticcontrast">
+                <img src={automaticcontrast} alt="automatic-contrast"/>
+            </div>
+            <div className="menu-icons info">
+                <img src={info} alt="Info"/>
+            </div>
+          </div>
           <div className="section left" >
             <fieldset>  
               <legend>DANH SÁCH BÀI VIẾT</legend>
@@ -97,6 +130,12 @@ class App extends Component {
               }
             } />
           </div>
+        </div>
+        <div className="copyright">
+          <span>Made with</span> 
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heartbeat" className="svg-inline--fa fa-heartbeat fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="#e00" d="M320.2 243.8l-49.7 99.4c-6 12.1-23.4 11.7-28.9-.6l-56.9-126.3-30 71.7H60.6l182.5 186.5c7.1 7.3 18.6 7.3 25.7 0L451.4 288H342.3l-22.1-44.2zM473.7 73.9l-2.4-2.5c-51.5-52.6-135.8-52.6-187.4 0L256 100l-27.9-28.5c-51.5-52.7-135.9-52.7-187.4 0l-2.4 2.4C-10.4 123.7-12.5 203 31 256h102.4l35.9-86.2c5.4-12.9 23.6-13.2 29.4-.4l58.2 129.3 49-97.9c5.9-11.8 22.7-11.8 28.6 0l27.6 55.2H481c43.5-53 41.4-132.3-7.3-182.1z"></path></svg>
+          <span>MRC</span> 
         </div>
       </div>
     );

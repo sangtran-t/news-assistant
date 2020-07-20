@@ -8,7 +8,7 @@ class Assistant extends Component {
         this.state = {
             isLoaded:false,
             displayInput: false,
-            sayWhat: 'Chào Mừng!!!',
+            sayWhat: 'Wellcome !',
             chooseArticle: null,
             context: null,
             question: ""
