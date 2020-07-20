@@ -253,12 +253,12 @@ legend {
 .App-link {
   color: #61dafb;
 }
-
-@keyframes App-logo-spin {
+ */
+@keyframes spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-} */
+}

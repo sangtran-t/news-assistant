@@ -22,6 +22,7 @@
     height: 55px;
     width: 55px;
     margin-left: 2.1em;
+    animation: spin infinite 10s linear;
 }
 .search img {
     margin-right: 2em;
@@ -33,7 +34,9 @@
     flex-direction: row;
     margin-right: 2.1em;
 }
-
+/* .logo{
+    animation: spin infinite 20s linear;
+} */
 .icons img:hover{
     cursor: pointer;
     transform: scale(1.2);

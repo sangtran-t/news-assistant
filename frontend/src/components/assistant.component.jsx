@@ -11,7 +11,8 @@ class Assistant extends Component {
             sayWhat: 'Wellcome !',
             chooseArticle: null,
             context: null,
-            question: ""
+            question: "",
+            answer:null
         };
     }
 
@@ -52,6 +53,25 @@ class Assistant extends Component {
                     }
                 )
         }
+        
+        
+        await fetch("http://localhost:5000/predict?q=" + this.state.question + "&ctx=" + this.state.context,{method:"POST"})
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result);
+                    this.setState({
+                        isLoaded: true,
+                        answer:result
+                    })
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
+                }
+            )
         
         console.table(this.state);
     }
