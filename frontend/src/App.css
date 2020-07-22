@@ -52,12 +52,12 @@ body {
   border-bottom: 12px solid white;
 }
 .left {
-  width: 63%;
+  width: 55%;
 
 }
 
 .right {
-  width: 37%;
+  width: 45%;
 }
 
 .contents, .detail-contents {

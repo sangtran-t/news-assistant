@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import './styles/topbar.style.css';
 import search from '../images/search.svg';
 // import contact from '../images/contact.svg';
-import star from '../images/star.svg';
+// import star from '../images/star.svg';
 import facebook from "../images/facebook.svg";
 import twitter from '../images/twitter.svg';
 import messenger from '../images/messenger.svg';
+import rlogo from '../images/logo.jpg';
 
 class Navigation extends Component{
     
@@ -13,7 +14,7 @@ class Navigation extends Component{
         return (
             <div className="nav">
                 <div className="sub-nav logo">
-                    <img src={star} alt="Logo" />
+                    <img src={rlogo} alt="Logo" />
                 </div>
                 <div className="sub-nav">
                     <div className="icons search">
