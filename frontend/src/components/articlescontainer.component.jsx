@@ -6,7 +6,7 @@ class ArticlesContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            numOfLoading:20,
+            numOfLoading:10,
             error: null,
             isLoaded: false,
             articles: []
@@ -14,11 +14,11 @@ class ArticlesContainer extends Component {
     }
     
     calNumberOfLoading = (number) => {
-        return number + 10
+        return number + 5
     }
 
     loadData = (numberOfLoading) => {
-        fetch("http://localhost:1337/articles?limit=" + numberOfLoading)
+        fetch("https://api-mrc.herokuapp.com/articles?limit=" + numberOfLoading)
             .then((res) => res.json())
             .then(
                 (result) => {

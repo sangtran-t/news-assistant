@@ -22,15 +22,15 @@ class Assistant extends Component {
     toggleInput = () => {
         this.setState({
             displayInput: !this.state.displayInput,
-        })
+            answer: null,
+            question: "",
+        });
     }
 
     audioEndedHandle = () => {
         console.log('Audio Ended')
         this.setState({
             audioAnswer: null,
-            question: "",
-            answer: null,
             speeching: false,
             speechLoaded:true
         });
@@ -44,7 +44,7 @@ class Assistant extends Component {
     }
 
     convertText2Speech = async (textString) => {
-        const URL = "http://localhost:5000/speech?text="+textString;
+        const URL = "https://mrc-bots.azurewebsites.net/speech?text="+textString;
         await fetch(URL, {method: 'POST'})
             .then(res => res.json())
             .then(
@@ -70,6 +70,7 @@ class Assistant extends Component {
 
     clickSend = async () => {
         this.setState({
+            answer:null,
             audioAnswer: null,
             isLoaded: false,
             speechLoaded:false
@@ -84,9 +85,9 @@ class Assistant extends Component {
         })
         console.log("Choosed " + this.state.chooseArticle);
 
-        if (this.state.chooseArticle) {
+        if (this.state.chooseArticle && this.state.question) {
             console.log("Fetching of " + this.state.chooseArticle);
-            await fetch("http://localhost:1337/contents?id=" + this.state.chooseArticle)
+            await fetch("https://api-mrc.herokuapp.com/contents?id=" + this.state.chooseArticle)
                 .then(res => res.json())
                 .then(
                     (result) => {
@@ -105,14 +106,21 @@ class Assistant extends Component {
         
         
         
-            await fetch("http://localhost:5000/predict?q=" + this.state.question + "&ctx=" + this.state.context,{method:"POST"})
+            await fetch("https://mrc-bots.azurewebsites.net/predict", {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ ctx: this.state.context, q: this.state.question })
+            })
                 .then(res => res.json())
                 .then(
                     (result) => {
                         console.log(result);
                         this.setState({
                             isLoaded: true,
-                            answer:result
+                            answer: result
                         })
                     },
                     (error) => {
@@ -128,6 +136,11 @@ class Assistant extends Component {
             
             this.state.answer ? this.convertText2Speech('Câu trả lời bạn cần tìm là: ' + this.state.answer['answer'] + '.')
                 : this.convertText2Speech('Rất xin lỗi, hiện tại hệ thống không thể đáp ứng yêu cầu của bạn.')
+        } else {
+            this.setState({
+                isLoaded: true,
+            })
+            this.convertText2Speech('Vui lòng chọn bài báo và đặt câu hỏi.')
         }
     }
 
@@ -135,14 +148,15 @@ class Assistant extends Component {
         return (
             <div id="assistant">
                 <div id="dynamic">
-                    {this.state.displayInput ?
-                        <div className="sendmessage ">
+                    {this.state.displayInput ? (
+                        <div id="question-answer">
+                        <div className="sendmessage">
                             {(this.state.speeching) ? (
                                 <div id="bars">
-                                    <div class="bar"></div>
-                                    <div class="bar"></div>
-                                    <div class="bar"></div>
-                                    <div class="bar"></div>
+                                    <div className="bar"></div>
+                                    <div className="bar"></div>
+                                    <div className="bar"></div>
+                                    <div className="bar"></div>
                                 </div>
                             ) : (this.state.speechLoaded) ? (
                                 <svg onClick={this.clickSend} height="32px" width="32px" viewBox="0 0 24 24">
@@ -167,12 +181,18 @@ class Assistant extends Component {
                                 this.setState({
                                     question: event.target.value,
                                 })
-                            }} placeholder="Nhập câu hỏi..."></input>
+                                }} placeholder="Nhập câu hỏi...">
+                            </input>
                             {this.state.audioAnswer}
                         </div>
+                        <div id="answerbox">
+                            <textarea readOnly placeholder="Nội dung câu trả lời" value={this.state.answer ? "Trả lời:\n"+this.state.answer['answer'] : ""}/>
+                        </div>
+                        </div>)
                         : <div id="sayhello"><p>{this.state.sayWhat}</p></div>}
                 </div>
                 <img src={assistantlogo} alt="Assistant" onClick={this.toggleInput}/>
+                
             </div>
         );
     }

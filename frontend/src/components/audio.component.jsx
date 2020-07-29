@@ -33,7 +33,7 @@ class Audio extends Component {
         })
         if (!this.state.play) {
             console.log('Speaking...');
-            fetch("http://localhost:1337/audio?id=" + this.props.data.article.id)
+            fetch("https://api-mrc.herokuapp.com/audio?id=" + this.props.data.article.id)
                 .then((res) => res.json())
                 .then(
                     (result) => {

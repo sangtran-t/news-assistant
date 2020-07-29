@@ -12,6 +12,7 @@ import online from './images/online.svg';
 import rating from "./images/rating.svg";
 import address from './images/address.svg';
 import info from './images/info.svg';
+import uit from './images/uit.png';
 
 class App extends Component {
   constructor() {
@@ -20,7 +21,27 @@ class App extends Component {
       nameLegend:"GIỚI THIỆU",
       error: null,
       isLoaded: false,
-      contents: "TRẦN THANH SANG",
+      contents:
+        <div id="intro-container">
+          <img src={uit} width="100%" alt="UIT"/>
+          <p><b>DEMO ĐỌC HIỂU TỰ ĐỘNG TRÊN VĂN BẢN TIN TỨC SỨC KHỎE TIẾNG VIỆT</b></p>
+          <div id="intro">
+            <fieldset>
+              <legend>Sinh viên thực hiện</legend>
+              <div className="row-intro">
+                <p>TRẦN THANH SANG - 16521784</p>
+                <p>HUỲNH VĂN TÍN - 16521827</p>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Giảng viên hướng dẫn</legend>
+              <div className="row-intro">
+              <p>ThS. NGUYỄN VĂN KIỆT</p>
+              <p>TS. NGUYỄN LƯU THÙY NGÂN</p>
+            </div>
+            </fieldset>
+          </div>
+        </div>,
       activeArticle: null,
       currentPlaying:null
     };
@@ -33,45 +54,78 @@ class App extends Component {
     })
   }
 
-  fetchContents = (articleId) => {
-    this.setState({
-      contents: (
-        <div id="content-loading">
-          <svg xmlns = "http://www.w3.org/2000/svg" width="100" height="100" version = "1.0" viewBox = "-30 -30 200 200" >
-          <rect x="0" y="0" width="100%" height="100%" fill="#FFFFFF" /><g>
-            <circle cx="16" cy="64" r="16" fill="#000000" fillOpacity="1" />
-            <circle cx="16" cy="64" r="14.344" fill="#000000" fillOpacity="1" transform="rotate(45 64 64)" />
-            <circle cx="16" cy="64" r="12.531" fill="#000000" fillOpacity="1" transform="rotate(90 64 64)" />
-            <circle cx="16" cy="64" r="10.75" fill="#000000" fillOpacity="1" transform="rotate(135 64 64)" />
-            <circle cx="16" cy="64" r="10.063" fill="#000000" fillOpacity="1" transform="rotate(180 64 64)" />
-            <circle cx="16" cy="64" r="8.063" fill="#000000" fillOpacity="1" transform="rotate(225 64 64)" />
-            <circle cx="16" cy="64" r="6.438" fill="#000000" fillOpacity="1" transform="rotate(270 64 64)" />
-            <circle cx="16" cy="64" r="5.375" fill="#000000" fillOpacity="1" transform="rotate(315 64 64)" />
-            <animateTransform attributeName="transform" type="rotate" values="0 64 64;315 64 64;270 64 64;225 64 64;180 64 64;135 64 64;90 64 64;45 64 64" calcMode="discrete" dur="720ms" repeatCount="indefinite">
-            </animateTransform></g>
-          </svg>
-        </div>
-          )
-    })
-    fetch("http://localhost:1337/contents?id="+articleId)
-      .then(res => res.json())
+  fetchContents = (articleId, state) => {
+    if (state) {
+      this.setState({
+        contents: (
+          <div id="content-loading">
+            <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" version="1.0" viewBox="-30 -30 200 200" >
+              <rect x="0" y="0" width="100%" height="100%" fill="#FFFFFF" /><g>
+                <circle cx="16" cy="64" r="16" fill="#000000" fillOpacity="1" />
+                <circle cx="16" cy="64" r="14.344" fill="#000000" fillOpacity="1" transform="rotate(45 64 64)" />
+                <circle cx="16" cy="64" r="12.531" fill="#000000" fillOpacity="1" transform="rotate(90 64 64)" />
+                <circle cx="16" cy="64" r="10.75" fill="#000000" fillOpacity="1" transform="rotate(135 64 64)" />
+                <circle cx="16" cy="64" r="10.063" fill="#000000" fillOpacity="1" transform="rotate(180 64 64)" />
+                <circle cx="16" cy="64" r="8.063" fill="#000000" fillOpacity="1" transform="rotate(225 64 64)" />
+                <circle cx="16" cy="64" r="6.438" fill="#000000" fillOpacity="1" transform="rotate(270 64 64)" />
+                <circle cx="16" cy="64" r="5.375" fill="#000000" fillOpacity="1" transform="rotate(315 64 64)" />
+                <animateTransform attributeName="transform" type="rotate" values="0 64 64;315 64 64;270 64 64;225 64 64;180 64 64;135 64 64;90 64 64;45 64 64" calcMode="discrete" dur="720ms" repeatCount="indefinite">
+                </animateTransform></g>
+            </svg>
+          </div>
+        )
+      })
+    fetch("https://api-mrc.herokuapp.com/contents?id=" + articleId)
+      .then((res) => res.json())
       .then(
         (result) => {
           this.setState({
-              isLoaded: true,
-              contents: result['paragraphs_clear'],
-              nameLegend: "NỘI DUNG BÀI ĐỌC",
-              activeArticle:articleId
-          })
+            isLoaded: true,
+            contents: result["paragraphs_clear"],
+            nameLegend: "NỘI DUNG BÀI ĐỌC",
+            activeArticle: articleId,
+          });
         },
         (error) => {
           this.setState({
             isLoaded: true,
             error,
-            contents: (<div>Error: {error.message}</div>)
-          })
+            contents: <div>Error: {error.message}</div>,
+          });
         }
-      )
+      );
+    }
+    else {
+      this.setState({
+        activeArticle: null,
+        contents: (
+          <div id="intro-container">
+            <img src={uit} width="100%" alt="UIT" />
+            <p>
+              <b>
+                DEMO ĐỌC HIỂU TỰ ĐỘNG TRÊN VĂN BẢN TIN TỨC SỨC KHỎE TIẾNG VIỆT
+              </b>
+            </p>
+            <div id="intro">
+              <fieldset>
+                <legend>Sinh viên thực hiện</legend>
+                <div className="row-intro">
+                  <p>TRẦN THANH SANG - 16521784</p>
+                  <p>HUỲNH VĂN TÍN - 16521827</p>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>Giảng viên hướng dẫn</legend>
+                <div className="row-intro">
+                  <p>ThS. NGUYỄN VĂN KIỆT</p>
+                  <p>TS. NGUYỄN LƯU THÙY NGÂN</p>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        ),
+      });
+    }
   }
 
   render() {

@@ -22,7 +22,7 @@
     height: 55px;
     width: 55px;
     margin-left: 2.1em;
-    animation: spin infinite 15s linear;
+    animation: spin infinite 20s linear;
     border-radius: 50%;
 }
 .search img {

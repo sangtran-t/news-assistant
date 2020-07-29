@@ -2,13 +2,15 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 15vh;
+    /* height: 20em; */
+    height: 24.3vh;
     width: auto;
     background-color: #ffffff;
     border-radius: 10px;
-    margin: 3px;
+    margin: 3px 2px 0px 2px;
     border: 1px solid #DCDCDC;
     padding: 0px 30px;
+    bottom: 0px;
 }
 
 #assistant img {
@@ -51,19 +53,33 @@
 
 #dynamic {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row-reverse;
+    /* justify-content: center; */
+    align-items: center;
 }
 
 #dynamic .sendmessage {
     width: 100%;
-    animation: slide 5s;
+    /* animation: slide 5s; */
+    animation: fadein 3s;
+    animation: fadein 3s;
+    -moz-animation: fadein 3s;
+    -webkit-animation: fadein 3s;
+    -o-animation: fadein 3s;
+    animation-delay: 1ms;
     animation-delay: 1ms;
 }
 
 @keyframes slide {
-  from {width: 25%;}
-  to {width: 100%;}
+    from {width: 25%;}
+    to {width: 100%;}
+}
+
+@keyframes slide2 {
+    from {width: 25%;}
+    to {width: 89%;}
 }
 
 .sendmessage input {
@@ -75,13 +91,15 @@
     border-radius: 30px;
     padding: 10px;
     height: 22px;
-    box-shadow: 0px 0px 20px lightgrey;
+    margin-right: 5px;
+    box-shadow: 0px 0px 20px rgb(212, 212, 212);
 }
 
 .sendmessage svg {
     margin: 2px 3px;
     fill: #bec2c9;
     opacity: .5;
+    border-radius: 5px;
 }
 
 .sendmessage svg:hover {
@@ -101,7 +119,7 @@
     margin: 0pc 20px;
     font-weight: bold;
     box-shadow: 0px 0px 20px lightgrey;
-    animation: slide 5s infinite;
+    animation: slide 5s infinite ease-in;
     animation-delay: 1s;
 }
 
@@ -156,7 +174,39 @@
         height: 30px;        
     }
 }
+#answerbox {
+    margin: 15px 0px 0px 0px;
+    width: 88%;
+    /* height: 50%; */
+    animation: fadein 3s;
+    animation: fadein 3s;
+    -moz-animation: fadein 3s;
+    -webkit-animation: fadein 3s;
+    -o-animation: fadein 3s;
+    animation-delay: 1ms;
+}
+#answerbox textarea{
+    width: 100%;
+}
 
+#question-answer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+textarea{
+    font-family: Quicksand;
+    outline: none;
+    background-color: #F0F2F5;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    height: 60px;
+    resize: none;
+    box-shadow: 3px 3px 10px lightgrey;
+}
 .bar:nth-child(1)  { left: 1px; animation-duration: 474ms; }
 .bar:nth-child(2)  { left: 6px; animation-duration: 433ms; }
 .bar:nth-child(3)  { left: 11px; animation-duration: 407ms; }
@@ -167,3 +217,49 @@
 .bar:nth-child(8)  { left: 43px; animation-duration: 419ms; }
 .bar:nth-child(9)  { left: 49px; animation-duration: 487ms; }
 .bar:nth-child(10) { left: 55px; animation-duration: 442ms; } */
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadein {
+
+    /* Firefox */
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein {
+
+    /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadein {
+
+    /* Opera */
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
