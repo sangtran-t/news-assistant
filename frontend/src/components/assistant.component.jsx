@@ -104,8 +104,6 @@ class Assistant extends Component {
                     }
                 )
         
-        
-        
             await fetch("https://mrc-bots.azurewebsites.net/predict", {
                 method: "POST",
                 headers: {
