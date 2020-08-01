@@ -31,10 +31,10 @@
     -o-animation: fadein 1s ease; */
 
     animation-name: modalFade;
-    animation-duration: .3s;
+    animation-duration: 1s;
     transition:0.5s;
     -webkit-transition:0.5s;
-    animation-iteration-count: 3;
+    /* animation-iteration-count: 3; */
     animation-direction: alternate;
 }
 .popup_inner div {
