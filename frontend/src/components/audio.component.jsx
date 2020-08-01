@@ -33,7 +33,7 @@ class Audio extends Component {
         })
         if (!this.state.play) {
             console.log('Speaking...');
-            fetch("https://api-mrc.herokuapp.com/audio?id=" + this.props.data.article.id)
+            fetch(process.env.REACT_APP_BE_API_ENDPOINT+"/audio?id=" + this.props.data.article.id)
                 .then((res) => res.json())
                 .then(
                     (result) => {

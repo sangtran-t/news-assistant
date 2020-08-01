@@ -249,8 +249,11 @@ div::-webkit-scrollbar-thumb {
   justify-content: space-between;
 }
 
+.row-intro p {
+  font-size: small;
+}
+
 #intro-container p{
-  /* font-size: smaller; */
   text-align: center;
 }
 #intro-container p b {

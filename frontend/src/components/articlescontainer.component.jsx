@@ -6,7 +6,7 @@ class ArticlesContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            numOfLoading:10,
+            numOfLoaded:0,
             error: null,
             isLoaded: false,
             articles: [],
@@ -14,17 +14,17 @@ class ArticlesContainer extends Component {
         };
     }
     
-    calNumberOfLoading = (number) => {
-        return number + 5
+    calNumberOfLoaded = (number) => {
+        return number + 10
     }
 
-    loadData = (numberOfLoading) => {
-        fetch("https://api-mrc.herokuapp.com/articles?limit=" + numberOfLoading)
+    loadData = (numberOfLoaded) => {
+        fetch(process.env.REACT_APP_BE_API_ENDPOINT + "/articles?current=" + numberOfLoaded)
             .then((res) => res.json())
             .then(
                 (result) => {
                     this.setState({
-                        articles: result,
+                        articles: [...this.state.articles,...result],
                         isLoaded: true,
                         loading:false
                     });
@@ -40,12 +40,12 @@ class ArticlesContainer extends Component {
     }
 
     componentDidMount() {
-        this.loadData(this.state.numOfLoading)
+        this.loadData(this.state.numOfLoaded)
     };
     loadMore(currentArticles) {
-        var nextArticles = this.calNumberOfLoading(currentArticles);
+        var nextArticles = this.calNumberOfLoaded(currentArticles);
         this.setState({
-            numOfLoading: nextArticles,
+            numOfLoaded: nextArticles,
             loading:true
         })
         this.loadData(nextArticles);
@@ -87,7 +87,7 @@ class ArticlesContainer extends Component {
                     })}
                     <div id="loadmore">
                         <div id="sub-loadmore">
-                            {!this.state.loading ? <span onClick={() => this.loadMore(this.state.numOfLoading)}></span> :
+                            {!this.state.loading ? <span onClick={() => this.loadMore(this.state.numOfLoaded)}></span> :
                                 <svg  xmlns="http://www.w3.org/2000/svg" version="1.0" width="32px" height="32px" viewBox="0 0 128 128">
                                     <rect x="0" y="0" width="100%" height="100%" fill="#FFFFFF" /><g>
                                         <circle cx="16" cy="64" r="16" fill="#000000" fillOpacity="1" />

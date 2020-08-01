@@ -6,16 +6,6 @@ import Audio from './audio.component';
 
 import './styles/rowarticle.style.css'
 
-// const RawArticle = (article, callback) => {
-//     return (
-//         <div className="row-article">
-//             <Article {...article}/>
-//             <Audio {...article}/>
-//             <Content {...article}/>
-//         </div>
-//     )
-// }
-
 class RawArticle extends Component{
     constructor(props) {
         super(props);

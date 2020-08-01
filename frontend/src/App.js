@@ -75,7 +75,7 @@ class App extends Component {
           </div>
         )
       })
-    fetch("https://api-mrc.herokuapp.com/contents?id=" + articleId)
+    fetch(process.env.REACT_APP_BE_API_ENDPOINT + "/contents?id=" + articleId)
       .then((res) => res.json())
       .then(
         (result) => {

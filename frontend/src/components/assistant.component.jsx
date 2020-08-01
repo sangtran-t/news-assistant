@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+
 import './styles/assistant.style.css';
 import assistantlogo from '../images/assistant.svg';
-
+import viewdetail from '../images/viewdetails.png';
+import Popup from './popup.component';
 class Assistant extends Component {
     constructor(props) {
         super(props);
@@ -15,8 +17,15 @@ class Assistant extends Component {
             answer: null,
             audioAnswer: null,
             speeching: false,
-            speechLoaded:true
+            speechLoaded: true,
+            showPopup: false
         };
+    }
+
+    togglePopup() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
     }
 
     toggleInput = () => {
@@ -44,7 +53,7 @@ class Assistant extends Component {
     }
 
     convertText2Speech = async (textString) => {
-        const URL = "https://mrc-bots.azurewebsites.net/speech?text="+textString;
+        const URL = process.env.REACT_APP_MRC_BOT_ENDPOINT+"/speech?text="+textString;
         await fetch(URL, {method: 'POST'})
             .then(res => res.json())
             .then(
@@ -87,14 +96,33 @@ class Assistant extends Component {
 
         if (this.state.chooseArticle && this.state.question) {
             console.log("Fetching of " + this.state.chooseArticle);
-            await fetch("https://api-mrc.herokuapp.com/contents?id=" + this.state.chooseArticle)
+            // await fetch(process.env.REACT_APP_BE_API_ENDPOINT+"/contents?id=" + this.state.chooseArticle)
+            await fetch(process.env.REACT_APP_BE_API_ENDPOINT + "/relevant?q=" + this.state.question)
                 .then(res => res.json())
                 .then(
-                    (result) => {
-                        this.setState({
-                            isLoaded: true,
-                            context: result['paragraphs_clear']
-                        })
+                    async (result) => {
+                        result[0]['score'] >= 80 ?
+                            this.setState({
+                                isLoaded: true,
+                                context: result[0]['paragraphs_clear']
+                            }) : (
+                            await fetch(process.env.REACT_APP_BE_API_ENDPOINT + "/contents?id=" + this.state.chooseArticle)
+                                .then(res => res.json())
+                                .then(
+                                    (result) => {
+                                        this.setState({
+                                            isLoaded: true,
+                                            context: result['paragraphs_clear']
+                                        })
+                                    },
+                                    (error) => {
+                                        this.setState({
+                                            isLoaded: true,
+                                            error
+                                        })
+                                    }
+                                )
+                            )
                     },
                     (error) => {
                         this.setState({
@@ -104,7 +132,7 @@ class Assistant extends Component {
                     }
                 )
         
-            await fetch("https://mrc-bots.azurewebsites.net/predict", {
+            await fetch(process.env.REACT_APP_MRC_BOT_ENDPOINT + "/predict", {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',
@@ -115,7 +143,6 @@ class Assistant extends Component {
                 .then(res => res.json())
                 .then(
                     (result) => {
-                        console.log(result);
                         this.setState({
                             isLoaded: true,
                             answer: result
@@ -130,7 +157,7 @@ class Assistant extends Component {
                     }
                 )
         
-            console.table(this.state);
+            // console.table(this.state);
             
             this.state.answer ? this.convertText2Speech('Câu trả lời bạn cần tìm là: ' + this.state.answer['answer'] + '.')
                 : this.convertText2Speech('Rất xin lỗi, hiện tại hệ thống không thể đáp ứng yêu cầu của bạn.')
@@ -140,6 +167,17 @@ class Assistant extends Component {
             })
             this.convertText2Speech('Vui lòng chọn bài báo và đặt câu hỏi.')
         }
+    }
+
+    getHighlightedText(text, highlight) {
+        // Split on highlight term and include term into parts, ignore case
+        const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+        return <span> { parts.map((part, i) => 
+            <span key={i} style={part === highlight ?
+                { fontWeight: 'bold', backgroundColor: 'aqua', borderRadius: '5px' } : {}}>
+                { part }
+            </span>)
+        } </span>;
     }
 
     render() {
@@ -185,8 +223,15 @@ class Assistant extends Component {
                         </div>
                         <div id="answerbox">
                             <textarea readOnly placeholder="Nội dung câu trả lời" value={this.state.answer ? "Trả lời:\n"+this.state.answer['answer'] : ""}/>
+                                <img src={viewdetail} alt="ViewDetail" onClick={this.togglePopup.bind(this)}
+                                    style={{visibility: this.state.answer ? 'visible' : 'hidden' }}  />
+                                {this.state.showPopup ?
+                                    <Popup contents={this.state.context ?
+                                        this.getHighlightedText(this.state.context, this.state.answer['answer']) : "Không có nội dung!"}
+                                    closePopup={this.togglePopup.bind(this)}/> : null
+                            }
                         </div>
-                        </div>)
+                    </div>)
                         : <div id="sayhello"><p>{this.state.sayWhat}</p></div>}
                 </div>
                 <img src={assistantlogo} alt="Assistant" onClick={this.toggleInput}/>
