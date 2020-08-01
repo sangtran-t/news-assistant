@@ -6,6 +6,11 @@ var articleSchema = new mongoose.Schema({
         default: "",
         required: true
     },
+    id: {
+        type: String,
+        default: "",
+        required: true
+    },
     link: {
         type: String,
         default: "",
@@ -27,21 +32,6 @@ var articleSchema = new mongoose.Schema({
         required: true
     },
     description: {
-        type: Array,
-        default: "",
-        required: true
-    },
-    paragraphs: {
-        type: String,
-        default: "",
-        required: true
-    },
-    paragraphs_clear: {
-        type: String,
-        default: "",
-        required: true
-    },
-    id: {
         type: String,
         default: "",
         required: true
@@ -51,12 +41,12 @@ var articleSchema = new mongoose.Schema({
         default: "",
         required: true
     },
-    audio: {
+    paragraphs_clear: {
         type: String,
         default: "",
         required: true
-    },
+    }
 });
 
-var Article = mongoose.model("Article", articleSchema, "mrc_data");
+var Article = mongoose.model("Article", articleSchema, "mrc_articles");
 module.exports = Article;

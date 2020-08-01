@@ -30,6 +30,10 @@ app.get("/contents", (req, res) => {
     database.GetContents(req, res);
 });
 
+app.get("/relevant", (req, res) => {
+  database.GetRelevantContent(req, res);
+})
+
 app.listen(process.env.PORT, () =>
   console.log(`Backend listening at http://localhost:${process.env.PORT}`)
 );
