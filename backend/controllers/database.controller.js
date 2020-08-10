@@ -66,30 +66,23 @@ module.exports.GetRelevantContent = async (req, res) => {
             'index': 'indexes',
             'text': {
                 'query': user_input,
-                'path': [
-                    'paragraphs_clear', 'title', 'description'
-                ],
+                'path': ['paragraphs_clear', 'description'],
                 'score': {
                     'boost': {
-                        'value': 5
+                        'value': 5,
                     }
                 }
-            },
-            'highlight': {
-                'path': [
-                    'paragraphs_clear', 'title', 'description'
-                ]
             }
         }
-    }, {
-        '$limit': 1
-    }, {
+    },{
         '$project': {
             'paragraphs_clear': 1,
             'score': {
                 '$meta': 'searchScore'
             }
         }
+    },{
+        '$limit': 1
     }];
     try {
         await ArticleSearch.aggregate(aggregation, (cmdErr, result) => {

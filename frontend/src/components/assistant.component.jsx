@@ -18,7 +18,8 @@ class Assistant extends Component {
             audioAnswer: null,
             speeching: false,
             speechLoaded: true,
-            showPopup: false
+            showPopup: false,
+            score: 0
         };
     }
 
@@ -37,7 +38,7 @@ class Assistant extends Component {
     }
 
     audioEndedHandle = () => {
-        console.log('Audio Ended')
+        // console.log('Audio Ended')
         this.setState({
             audioAnswer: null,
             speeching: false,
@@ -46,7 +47,7 @@ class Assistant extends Component {
     }
 
     audioPlayHandle = () => {
-        console.log('Audio Playing');
+        // console.log('Audio Playing');
         this.setState({
             speeching:true
         })
@@ -58,7 +59,7 @@ class Assistant extends Component {
             .then(res => res.json())
             .then(
                 async (result) => {
-                    console.log(result);
+                    // console.log(result);
                     await this.setState({
                         speechLoaded: true,
                         audioAnswer: (
@@ -85,38 +86,42 @@ class Assistant extends Component {
             speechLoaded:false
         });
         var { activeArticle, currentPlaying }=this.props.data;
-        console.log('Reading article...' + activeArticle);
-        console.log('Playing article...' + currentPlaying);
+        // console.log('Reading article...' + activeArticle);
+        // console.log('Playing article...' + currentPlaying);
 
         // var choosed = currentPlaying ? currentPlaying : activeArticle;
         await this.setState({
             chooseArticle: currentPlaying ? currentPlaying : activeArticle
         })
-        console.log("Choosed " + this.state.chooseArticle);
+        // console.log("Choosed " + this.state.chooseArticle);
 
         if (this.state.chooseArticle && this.state.question) {
-            console.log("Fetching of " + this.state.chooseArticle);
+            // console.log("Fetching of " + this.state.chooseArticle);
             // await fetch(process.env.REACT_APP_BE_API_ENDPOINT+"/contents?id=" + this.state.chooseArticle)
-            await fetch(process.env.REACT_APP_BE_API_ENDPOINT + "/relevant?q=" + this.state.question)
+            await fetch(process.env.REACT_APP_MRC_BOT_ENDPOINT + "/relevant?q=" + this.state.question)
                 .then(res => res.json())
                 .then(
                     async (result) => {
-                        result[0]['score'] >= 80 ?
+                        console.log(result);
+                        result['score'] > 0.5 ?
                             this.setState({
                                 isLoaded: true,
-                                context: result[0]['paragraphs_clear']
+                                score: result['score'],
+                                context: result['contents']
                             }) : (
                             await fetch(process.env.REACT_APP_BE_API_ENDPOINT + "/contents?id=" + this.state.chooseArticle)
                                 .then(res => res.json())
                                 .then(
                                     (result) => {
                                         this.setState({
+                                            score:0,
                                             isLoaded: true,
                                             context: result['paragraphs_clear']
                                         })
                                     },
                                     (error) => {
                                         this.setState({
+                                            score:0,
                                             isLoaded: true,
                                             error
                                         })
@@ -126,6 +131,7 @@ class Assistant extends Component {
                     },
                     (error) => {
                         this.setState({
+                            score:0,
                             isLoaded: true,
                             error
                         })
@@ -168,16 +174,23 @@ class Assistant extends Component {
             this.convertText2Speech('Vui lòng chọn bài báo và đặt câu hỏi.')
         }
     }
-
-    getHighlightedText(text, highlight) {
-        // Split on highlight term and include term into parts, ignore case
-        const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-        return <span> { parts.map((part, i) => 
-            <span key={i} style={part === highlight ?
-                { fontWeight: 'bold', backgroundColor: 'aqua', borderRadius: '5px' } : {}}>
-                { part }
-            </span>)
-        } </span>;
+    
+    getHighlightedText(text, highlight, score) {
+        const escapeRegExp = (string) => {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); 
+        };
+        const parts = text.split(new RegExp(`(${escapeRegExp(highlight)})`, 'gi'));
+        return(
+            <span>
+                {parts.map((part, i) =>
+                    <span key={i} style={part === highlight && i < 2 ?
+                        { fontWeight: 'bold', backgroundColor: 'aqua', borderRadius: '5px' } : {}}>
+                        {part}
+                    </span>)
+                }
+                <p style={{ fontWeight: 'bold', marginBottom: '0px' }}>Score: <span style={{ color: 'green' }}>{score}</span></p>
+            </span>
+        );
     }
 
     render() {
@@ -222,12 +235,12 @@ class Assistant extends Component {
                             {this.state.audioAnswer}
                         </div>
                         <div id="answerbox">
-                            <textarea readOnly placeholder="Nội dung câu trả lời" value={this.state.answer ? "Trả lời:\n"+this.state.answer['answer'] : ""}/>
+                                <textarea rows="4" readOnly placeholder="Nội dung câu trả lời" value={this.state.answer ? "Trả lời:\n" + this.state.answer['answer']: ""}/>
                                 <img src={viewdetail} alt="ViewDetail" onClick={this.togglePopup.bind(this)}
                                     style={{visibility: this.state.answer ? 'visible' : 'hidden' }}  />
                                 {this.state.showPopup ?
                                     <Popup contents={this.state.context ?
-                                        this.getHighlightedText(this.state.context, this.state.answer['answer']) : "Không có nội dung!"}
+                                        this.getHighlightedText(this.state.context, this.state.answer['answer'], this.state.score) : "Không có nội dung!"}
                                     closePopup={this.togglePopup.bind(this)}/> : null
                             }
                         </div>

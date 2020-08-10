@@ -48,7 +48,7 @@ class App extends Component {
   }
 
   getArticleCurrentPlaying = (articleId) => {
-    console.log("Current playing "+articleId);
+    // console.log("Current playing "+articleId);
     this.setState({
       currentPlaying: articleId,
     })

@@ -10,12 +10,21 @@
     margin: 0px 5px;
 }
 
+#audio-loading {
+    animation: slide_from_zero 5s;
+    /* width: 100px; */
+    max-width: 100px;
+}
 #audio-control,
 #audio-loading {
     margin: 0px 5px 0px 3px;
     outline: none;
     height: 33px;
-    width: 200px;
+    width: 100px;
+    animation: slide_from_zero 5s;
+}
+#audio-control {
+    animation: fadein 5s;
 }
 
 .audio, .read {
@@ -31,10 +40,11 @@
 } */
 
 .audio:hover, .read:hover{
-    transform: scale(1.5);
+    transform: scale(1.4);
     opacity: 1;
     cursor: pointer;
 }
+
 
 .tooltip, .tootip-read {
     display: inline-block;
@@ -65,13 +75,13 @@ audio::-webkit-media-controls-panel {
     padding: 0px;
 }
 
-audio::-webkit-media-controls-current-time-display,
+/* audio::-webkit-media-controls-current-time-display,
 audio::-webkit-media-controls-timeline,
 audio::-webkit-media-controls-volume-slider-container,
 audio::-webkit-media-controls-volume-slider,
 audio::-webkit-media-controls-mute-button {
     margin: 0px;
-}
+} */
 audio::-webkit-media-controls-timeline{
     padding: 5px;
 }
@@ -93,6 +103,11 @@ audio::-webkit-media-controls-timeline{
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
 } */
+
+@keyframes slide_from_zero {
+    from {width: 0%;}
+    to {width: 100%;}
+}
 
 @-webkit-keyframes sdb03 {
     0% {
