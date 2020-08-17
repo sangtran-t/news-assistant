@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './styles/article.style.css';
-import defaulImage from '../images/default.jpg';
+import defaulImage from '../images/default.png';
 class Article extends Component{
     constructor(props) {
         super(props);

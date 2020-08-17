@@ -102,7 +102,7 @@ class Assistant extends Component {
                 .then(res => res.json())
                 .then(
                     async (result) => {
-                        console.log(result);
+                        // console.log(result);
                         result['score'] > 0.5 ?
                             this.setState({
                                 isLoaded: true,
