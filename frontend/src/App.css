@@ -100,7 +100,7 @@ fieldset {
 }
 
 legend {
-  font-weight: bold;
+  font-weight: bold ;
   font-size: smaller;
   color: grey;
 }
@@ -263,4 +263,9 @@ legend {
   to {
     transform: rotate(360deg);
   }
+}
+
+@font-face {
+  font-family: Quicksand;
+  src: url('components/styles/fonts/Quicksand.ttf');
 }
