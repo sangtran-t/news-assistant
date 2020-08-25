@@ -19,7 +19,8 @@ class Assistant extends Component {
             speeching: false,
             speechLoaded: true,
             showPopup: false,
-            score: 0
+            score: 0,
+            loading: false
         };
     }
 
@@ -83,7 +84,8 @@ class Assistant extends Component {
             answer:null,
             audioAnswer: null,
             isLoaded: false,
-            speechLoaded:false
+            speechLoaded: false,
+            loading:true
         });
         var { activeArticle, currentPlaying }=this.props.data;
         // console.log('Reading article...' + activeArticle);
@@ -151,13 +153,15 @@ class Assistant extends Component {
                     (result) => {
                         this.setState({
                             isLoaded: true,
-                            answer: result
+                            loading: false,
+                            answer: result,
                         })
                     },
                     (error) => {
                         this.setState({
                             answer:null,
                             isLoaded: true,
+                            loading: false,
                             error
                         })
                     }
@@ -235,13 +239,22 @@ class Assistant extends Component {
                             {this.state.audioAnswer}
                         </div>
                         <div id="answerbox">
-                                <textarea rows="4" readOnly placeholder="Nội dung câu trả lời" value={this.state.answer ? "Trả lời:\n" + this.state.answer['answer']: ""}/>
-                                <img src={viewdetail} alt="ViewDetail" onClick={this.togglePopup.bind(this)}
-                                    style={{visibility: this.state.answer ? 'visible' : 'hidden' }}  />
-                                {this.state.showPopup ?
-                                    <Popup contents={this.state.context ?
-                                        this.getHighlightedText(this.state.context, this.state.answer['answer'], this.state.score) : "Không có nội dung!"}
-                                    closePopup={this.togglePopup.bind(this)}/> : null
+                            <div id="answerbox-inner">
+                                    <textarea rows="4" readOnly placeholder={this.state.loading ? "" : "Nội dung câu trả lời"}
+                                        value={this.state.answer ? "Trả lời:\n" + this.state.answer['answer'] : ""} />
+                                    {this.state.loading ? <ul className="drops blue">
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul> : null}
+                            </div>
+                            <img src={viewdetail} alt="ViewDetail" onClick={this.togglePopup.bind(this)}
+                                style={{visibility: this.state.answer ? 'visible' : 'hidden' }}  />
+                            {this.state.showPopup ?
+                                <Popup contents={this.state.context ?
+                                    this.getHighlightedText(this.state.context, this.state.answer['answer'], this.state.score) : "Không có nội dung!"}
+                                closePopup={this.togglePopup.bind(this)}/> : null
                             }
                         </div>
                     </div>)

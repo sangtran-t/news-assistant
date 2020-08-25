@@ -165,7 +165,7 @@
 
 @keyframes sound {
     0% {
-       opacity: .35;
+        opacity: .35;
         height: 3px; 
     }
     100% {
@@ -176,7 +176,7 @@
 #answerbox {
     margin: 15px 0px 0px 0px;
     width: 100%;
-    /* height: 50%; */
+    height: 85px;
     animation: fadein 3s;
     -moz-animation: fadein 3s;
     -webkit-animation: fadein 3s;
@@ -184,14 +184,27 @@
     animation-delay: 1ms;
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    /* align-items: flex-end; */
 }
-#answerbox textarea{
+
+#answerbox-inner {
+    display: flex;
     width: 100%;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+#answerbox-inner textarea {
+    width: 95%;
+    position: absolute;
+}
+#answerbox-inner .drops {
+    /* width: 95%; */
+    position: absolute;
 }
 
 #answerbox img {
-    height:32px;
+    height:30px;
     width:32px;
     margin: 2px 3px;
     border-radius: 50%;
@@ -276,5 +289,103 @@ textarea{
 
     to {
         opacity: 1;
+    }
+}
+
+
+
+
+.drops {
+    list-style: none;
+    position: relative;
+    height: 10px;
+    width: 50px;
+    margin: 0 auto;
+    /* center the animation */
+    /* margin-top: 40px; */
+    /* padd the top from the text */
+}
+
+.drops li {
+    position: absolute;
+    top: 0px;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    /* margin-left: -3000px; */
+    /* the dots like to jump out of place without this */
+    animation-name: loading;
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    background-color: rgba(37, 37, 37, 0.5);
+    box-shadow: 0 0 5px #8a8a8a6e,
+    0 0 10px #8a8a8a6e,
+    0 0 15px #8a8a8a6e,
+    0 0 20px #8a8a8a6e,
+    0 0 30px #8a8a8a6e,
+    0 0 40px #8a8a8a6e;
+}
+
+.drops li:nth-child(1) {
+    left: 0px;
+    animation-delay: 400ms;
+}
+
+.drops li:nth-child(2) {
+    left: 25px;
+    animation-delay: 300ms;
+}
+
+.drops li:nth-child(3) {
+    left: 50px;
+    animation-delay: 200ms;
+}
+
+.drops li:nth-child(4) {
+    left: 75px;
+    animation-delay: 100ms;
+}
+
+/* .drops li:nth-child(5) {
+    left: 80px;
+    animation-delay: 1000ms;
+} */
+
+@keyframes loading {
+    0% {
+        margin-left: -400px;
+        z-index: -10;
+        opacity: 0;
+    }
+
+    15% {
+        z-index: 0;
+        opacity: 0;
+    }
+
+    30%,
+    70% {
+        margin-left: 0px;
+        z-index: 1;
+        opacity: .8;
+    }
+
+    50% {
+        margin-left: 0px;
+        z-index: 1;
+        opacity: 1;
+    }
+
+    88% {
+        z-index: 0;
+        opacity: 0;
+    }
+
+    100% {
+        margin-left: 350px;
+        z-index: -1;
+        opacity: 0;
     }
 }
