@@ -97,6 +97,7 @@ fieldset {
   border: 1px solid gainsboro;
   border-radius: 10px;
   background-color: white;
+  overflow-wrap: anywhere;
 }
 
 legend {
@@ -268,4 +269,9 @@ legend {
 @font-face {
   font-family: Quicksand;
   src: url('components/styles/fonts/Quicksand.ttf');
+}
+
+
+#okbtn:hover{
+  cursor: pointer;
 }

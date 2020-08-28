@@ -60,11 +60,14 @@ class Audio extends Component {
                 );
         } else {
             console.log("Turn off speaking!");
+
             this.setState({
             play: !this.state.play,
             isLoaded: false,
             audioElem: null,
             });
+
+            this.props.data.getArticleCurrentPlaying(null);
         }
     }
     render() {

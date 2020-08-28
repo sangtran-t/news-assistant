@@ -10,7 +10,7 @@
     bottom: 0;
     margin: auto;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    z-index: 2;
 }
 
 .popup_inner {
@@ -40,10 +40,11 @@
     /* animation-iteration-count: 3; */
     animation-direction: alternate;
 }
-.popup_inner div {
+.popup_inner > div {
     overflow: auto;
-    margin: 20px 0px 20px 40px;
+    margin: 20px 10px 20px 40px;
     padding: 5px;
+    width: 95%;
 }
 
 .popup {
@@ -53,6 +54,17 @@
     -webkit-transition:0.5s;
     /* animation-iteration-count: 3;
     animation-direction: alternate; */
+}
+
+.popup_inner > img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    opacity: .5;
+}
+
+.popup_inner > img:hover{
+    cursor: pointer;
 }
 
 @keyframes modalFade {

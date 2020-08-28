@@ -4,6 +4,7 @@ import './App.css';
 import ArticlesContainer from './components/articlescontainer.component';
 import Assistant from './components/assistant.component';
 import Navigation from './components/topbar.component';
+import Popup from './components/popup.component';
 
 import automaticcontrast from './images/automatic-contrast.svg';
 import database from './images/database.svg';
@@ -13,6 +14,8 @@ import rating from "./images/rating.svg";
 import address from './images/address.svg';
 import info from './images/info.svg';
 import uit from './images/uit.png';
+import compose from './images/compose.svg';
+import ok from './images/ok.svg';
 
 class App extends Component {
   constructor() {
@@ -21,7 +24,7 @@ class App extends Component {
       nameLegend:"GIỚI THIỆU",
       error: null,
       isLoaded: false,
-      contents:
+      defaultContents:
         <div id="intro-container">
           <img src={uit} width="100%" alt="UIT"/>
           <p><b>DEMO ĐỌC HIỂU TỰ ĐỘNG TRÊN VĂN BẢN TIN TỨC SỨC KHỎE TIẾNG VIỆT</b></p>
@@ -43,14 +46,26 @@ class App extends Component {
           </div>
         </div>,
       activeArticle: null,
-      currentPlaying:null
+      currentPlaying:null,
+      showPopup:false,
+      showCloseBtn:false,
+      contents: null,
+      inputMode: false
     };
+  }
+
+  togglePopup() {
+    this.setState({
+        showPopup: !this.state.showPopup,
+        inputMode: true
+    });
   }
 
   getArticleCurrentPlaying = (articleId) => {
     // console.log("Current playing "+articleId);
     this.setState({
       currentPlaying: articleId,
+      inputMode:false
     })
   }
 
@@ -73,7 +88,8 @@ class App extends Component {
                 </animateTransform></g>
             </svg>
           </div>
-        )
+        ),
+        inputMode:false
       })
     fetch(process.env.REACT_APP_BE_API_ENDPOINT + "/contents?id=" + articleId)
       .then((res) => res.json())
@@ -98,32 +114,8 @@ class App extends Component {
     else {
       this.setState({
         activeArticle: null,
-        contents: (
-          <div id="intro-container">
-            <img src={uit} width="100%" alt="UIT" />
-            <p>
-              <b>
-                DEMO ĐỌC HIỂU TỰ ĐỘNG TRÊN VĂN BẢN TIN TỨC SỨC KHỎE TIẾNG VIỆT
-              </b>
-            </p>
-            <div id="intro">
-              <fieldset>
-                <legend>Sinh viên thực hiện</legend>
-                <div className="row-intro">
-                  <p>TRẦN THANH SANG - 16521784</p>
-                  <p>HUỲNH VĂN TÍN - 16521827</p>
-                </div>
-              </fieldset>
-              <fieldset>
-                <legend>Giảng viên hướng dẫn</legend>
-                <div className="row-intro">
-                  <p>ThS. NGUYỄN VĂN KIỆT</p>
-                  <p>TS. NGUYỄN LƯU THÙY NGÂN</p>
-                </div>
-              </fieldset>
-            </div>
-          </div>
-        ),
+        nameLegend:"GIỚI THIỆU",
+        contents: this.state.defaultContents
       });
     }
   }
@@ -131,6 +123,21 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        {this.state.showPopup ?
+            <Popup contents={
+              <div style={{display: 'flex', flexDirection: 'row', alignItems:'center', justifyContent:'space-around', gap:'18px'}}>
+                <textarea placeholder="Nhập nội dung..." autoFocus style={{height:'45vh', width: '96%', boxShadow: 'none', fontSize:'medium'}}
+                  onChange={(event)=>{
+                    this.setState({
+                      nameLegend: event.target.value ? "NỘI DUNG BÀI ĐỌC" : "GIỚI THIỆU",
+                      contents: event.target.value,
+                      inputMode: event.target.value ? true : false
+                    })
+                  }}/>
+                <img id="okbtn" src={ok} alt="OK" style={{height:'40px', width: '40px'}} onClick={this.togglePopup.bind(this)}/>
+              </div>
+            } closePopup={this.togglePopup.bind(this)} showCloseBtn={this.state.showCloseBtn}/>: null
+        }
         <Navigation/>
         <div className="main-container" >
           <div className="section menubar">
@@ -150,6 +157,9 @@ class App extends Component {
               <div className="menu-icons address">
                   <img src={address} alt="Address"/>
               </div>
+              <div className="menu-icons compose">
+                <img src={compose} alt="Compose" onClick={this.togglePopup.bind(this)}/>
+              </div>
               <div className="menu-icons info">
                 <img src={info} alt="Info"/>
               </div>
@@ -162,9 +172,9 @@ class App extends Component {
           </div>
           <div className="section left" >
             <fieldset>  
-              <legend>DANH SÁCH BÀI VIẾT</legend>
+              <legend>DANH SÁCH BÀI BÁO</legend>
               <div className="contents">
-                < ArticlesContainer data = {
+                <ArticlesContainer data = {
                   {
                     fetchContents: this.fetchContents.bind(this),
                     getArticleCurrentPlaying:this.getArticleCurrentPlaying.bind(this)
@@ -178,13 +188,14 @@ class App extends Component {
             <fieldset>
               <legend>{this.state.nameLegend}</legend>
               <div className="detail-contents">
-                {this.state.contents}
+                  {!this.state.contents ? this.state.defaultContents : this.state.contents}
               </div>
             </fieldset>
             <Assistant data={
               {
                 activeArticle: this.state.activeArticle,
-                currentPlaying: this.state.currentPlaying
+                currentPlaying: this.state.currentPlaying,
+                userData: this.state.inputMode ? this.state.contents : null
               }
             } />
           </div>

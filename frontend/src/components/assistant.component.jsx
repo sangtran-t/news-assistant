@@ -20,7 +20,9 @@ class Assistant extends Component {
             speechLoaded: true,
             showPopup: false,
             score: 0,
-            loading: false
+            loading: false,
+            showCloseBtn:true,
+            useUserInput:false
         };
     }
 
@@ -79,6 +81,12 @@ class Assistant extends Component {
             )
     }
 
+    handleEnter = (e)=>{
+        if (e.key === 'Enter') {
+            this.clickSend()
+        }
+    }
+
     clickSend = async () => {
         this.setState({
             answer:null,
@@ -87,58 +95,61 @@ class Assistant extends Component {
             speechLoaded: false,
             loading:true
         });
-        var { activeArticle, currentPlaying }=this.props.data;
-        // console.log('Reading article...' + activeArticle);
-        // console.log('Playing article...' + currentPlaying);
-
-        // var choosed = currentPlaying ? currentPlaying : activeArticle;
+        var { activeArticle, currentPlaying, userData }=this.props.data;
         await this.setState({
             chooseArticle: currentPlaying ? currentPlaying : activeArticle
         })
-        // console.log("Choosed " + this.state.chooseArticle);
-
-        if (this.state.chooseArticle && this.state.question) {
+        
+        if (this.state.question) {
             // console.log("Fetching of " + this.state.chooseArticle);
             // await fetch(process.env.REACT_APP_BE_API_ENDPOINT+"/contents?id=" + this.state.chooseArticle)
-            await fetch(process.env.REACT_APP_MRC_BOT_ENDPOINT + "/relevant?q=" + this.state.question)
-                .then(res => res.json())
-                .then(
-                    async (result) => {
-                        // console.log(result);
-                        result['score'] > 0.5 ?
-                            this.setState({
-                                isLoaded: true,
-                                score: result['score'],
-                                context: result['contents']
-                            }) : (
-                            await fetch(process.env.REACT_APP_BE_API_ENDPOINT + "/contents?id=" + this.state.chooseArticle)
-                                .then(res => res.json())
-                                .then(
-                                    (result) => {
-                                        this.setState({
-                                            score:0,
-                                            isLoaded: true,
-                                            context: result['paragraphs_clear']
-                                        })
-                                    },
-                                    (error) => {
-                                        this.setState({
-                                            score:0,
-                                            isLoaded: true,
-                                            error
-                                        })
-                                    }
+
+            if(userData){
+                await this.setState({
+                    score: 0,
+                    context: userData
+                })
+            } else if (this.state.chooseArticle) {
+                await fetch(process.env.REACT_APP_MRC_BOT_ENDPOINT + "/relevant?q=" + this.state.question)
+                    .then(res => res.json())
+                    .then(
+                        async (result) => {
+                            console.log(result);
+                            result['score'] > 0.5 ?
+                                this.setState({
+                                    isLoaded: true,
+                                    score: result['score'],
+                                    context: result['contents']
+                                }) : (
+                                    await fetch(process.env.REACT_APP_BE_API_ENDPOINT + "/contents?id=" + this.state.chooseArticle)
+                                        .then(res => res.json())
+                                        .then(
+                                            (result) => {
+                                                this.setState({
+                                                    score:0,
+                                                    isLoaded: true,
+                                                    context: result['paragraphs_clear']
+                                                })
+                                            },
+                                            (error) => {
+                                                this.setState({
+                                                    score:0,
+                                                    isLoaded: true,
+                                                    error
+                                                })
+                                            }
+                                        )
                                 )
-                            )
-                    },
-                    (error) => {
-                        this.setState({
-                            score:0,
-                            isLoaded: true,
-                            error
-                        })
-                    }
-                )
+                        },
+                        (error) => {
+                            this.setState({
+                                score:0,
+                                isLoaded: true,
+                                error
+                            })
+                        }
+                    )
+            }
         
             await fetch(process.env.REACT_APP_MRC_BOT_ENDPOINT + "/predict", {
                 method: "POST",
@@ -174,6 +185,7 @@ class Assistant extends Component {
         } else {
             this.setState({
                 isLoaded: true,
+                loading: false,
             })
             this.convertText2Speech('Vui lòng chọn bài báo và đặt câu hỏi.')
         }
@@ -234,7 +246,7 @@ class Assistant extends Component {
                                 this.setState({
                                     question: event.target.value,
                                 })
-                                }} placeholder="Nhập câu hỏi...">
+                                }} onKeyPress={this.handleEnter} placeholder="Nhập câu hỏi...">
                             </input>
                             {this.state.audioAnswer}
                         </div>
@@ -254,7 +266,7 @@ class Assistant extends Component {
                             {this.state.showPopup ?
                                 <Popup contents={this.state.context ?
                                     this.getHighlightedText(this.state.context, this.state.answer['answer'], this.state.score) : "Không có nội dung!"}
-                                closePopup={this.togglePopup.bind(this)}/> : null
+                                closePopup={this.togglePopup.bind(this)} showCloseBtn={this.state.showCloseBtn}/> : null
                             }
                         </div>
                     </div>)
