@@ -129,7 +129,7 @@ class App extends Component {
                 <textarea placeholder="Nhập nội dung..." autoFocus style={{height:'45vh', width: '96%', boxShadow: 'none', fontSize:'medium'}}
                   onChange={(event)=>{
                     this.setState({
-                      nameLegend: event.target.value ? "NỘI DUNG BÀI ĐỌC" : "GIỚI THIỆU",
+                      nameLegend: event.target.value ? "NỘI DUNG BÀI BÁO" : "GIỚI THIỆU",
                       contents: event.target.value,
                       inputMode: event.target.value ? true : false
                     })
