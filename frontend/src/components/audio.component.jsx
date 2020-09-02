@@ -6,9 +6,9 @@ class Audio extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          play: false,
-          isLoaded: false,
-          audioElem: null
+            play: false,
+            isLoaded: false,
+            audioElem: null
         };
     }
 

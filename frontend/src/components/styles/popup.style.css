@@ -47,7 +47,7 @@
     width: 95%;
 }
 
-.popup {
+.popup, .demopopup {
     animation-name: modalFade;
     animation-duration: .3s;
     transition:0.5s;
