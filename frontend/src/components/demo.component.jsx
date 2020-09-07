@@ -20,14 +20,30 @@ const options = [
             context: 'Sáng 1/9, đại diện Sở Y tế Quảng Trị cho hay người dân 5 xã gồm Vĩnh Hà, Vĩnh Ô, Vĩnh Tú (huyện Vĩnh Linh), xã Linh Trường (huyện Gio Linh), xã Hương Sơn (huyện Hướng Hóa), được tiêm vaccine bạch hầu trong tháng 9 và 10. Dự kiến, việc tiêm chủng thực hiện làm hai đợt, mỗi đợt tiêm một mũi, cách nhau một tháng. Kế hoạch tiêm chủng thực hiện theo phương thức cuốn chiếu để huy động được tối đa nguồn nhân lực, vật tư tiêm chủng, tránh bỏ sót người dân. Mục tiêu là trên 95% người từ 49 tháng tuổi đến 40 tuổi tại 5 xã được tiêm đủ mũi vaccine Td phòng bạch hầu. Kế hoạch tiêm chủng giúp tỉnh phòng chống dịch bạch hầu chủ động, giảm tỷ lệ mắc và tử vong. Quảng Trị đề nghị Bộ Y tế hỗ trợ 18.800 liều vaccine Td, kinh phí 157 triệu đồng. Hai tháng 7 và 8, Quảng Trị ghi nhận 22 ca bạch hầu. Bệnh nhân chủ yếu là người dân tộc thiểu số, ở vùng sâu xa, vùng khó khăn. Tại Tây Nguyên, từ đầu năm đến ngày 18/7 ghi nhận 117 ca bạch hầu, trong đó ba trường hợp tử vong. Đa số bệnh nhân không tiêm chủng vaccine bạch hầu đủ mũi, đúng lịch.', 
             question: 'Những tỉnh nào sẽ được tiêm vaccine bạch hầu?'
         }, 
-        label: 'Những tỉnh nào sẽ được tiêm vaccine bạch hầu?' },
+        label: 'Những tỉnh nào sẽ được tiêm vaccine bạch hầu?' 
+    },
     { 
         value: {
             context: 'Sáng 1/9, đại diện Sở Y tế Quảng Trị cho hay người dân 5 xã gồm Vĩnh Hà, Vĩnh Ô, Vĩnh Tú (huyện Vĩnh Linh), xã Linh Trường (huyện Gio Linh), xã Hương Sơn (huyện Hướng Hóa), được tiêm vaccine bạch hầu trong tháng 9 và 10. Dự kiến, việc tiêm chủng thực hiện làm hai đợt, mỗi đợt tiêm một mũi, cách nhau một tháng. Kế hoạch tiêm chủng thực hiện theo phương thức cuốn chiếu để huy động được tối đa nguồn nhân lực, vật tư tiêm chủng, tránh bỏ sót người dân. Mục tiêu là trên 95% người từ 49 tháng tuổi đến 40 tuổi tại 5 xã được tiêm đủ mũi vaccine Td phòng bạch hầu. Kế hoạch tiêm chủng giúp tỉnh phòng chống dịch bạch hầu chủ động, giảm tỷ lệ mắc và tử vong. Quảng Trị đề nghị Bộ Y tế hỗ trợ 18.800 liều vaccine Td, kinh phí 157 triệu đồng. Hai tháng 7 và 8, Quảng Trị ghi nhận 22 ca bạch hầu. Bệnh nhân chủ yếu là người dân tộc thiểu số, ở vùng sâu xa, vùng khó khăn. Tại Tây Nguyên, từ đầu năm đến ngày 18/7 ghi nhận 117 ca bạch hầu, trong đó ba trường hợp tử vong. Đa số bệnh nhân không tiêm chủng vaccine bạch hầu đủ mũi, đúng lịch.', 
             question: 'Kinh phí ước tính cho 18.800 liều vaccine bạch hầu là bao nhiêu?'
         }, 
         label: 'Kinh phí ước tính cho 18.800 liều vaccine bạch hầu là bao nhiêu?' 
-    }];
+    },
+    { 
+        value: {
+            context: '6 người ở Bệnh viện Phổi Đà Nẵng gồm các số 871, 863, 850, 891, 482, 817; Bệnh viện Dã chiến Hòa Vang, có 5 bệnh nhân số 478, 725, 760, 942, 1024, khỏi Covid-19.  Trong quá trình điều trị, họ xét nghiệm âm tính nCoV ba lần trở lên. Sau khỏi Covid-19, họ tiếp tục được theo dõi sức khỏe trong 14 ngày. Như vậy tổng số người khỏi bệnh cả nước lên 746. Chiều nay, Bộ Y tế thông báo "bệnh nhân 764", nam, 76 tuổi, ở Đà Nẵng, xét nghiệm ba lần âm tính với nCoV, tử vong do biến chứng bệnh nền nặng. Ca tử vong này không ghi nhận là do Covid-19. Tổng số ca nhiễm từ đầu dịch là 1.044, số người tử vong do Covid-19 là 34. Những người tử vong tuổi từ 33 đến 93, trong đó 21 người mắc bệnh lý nền suy thận mạn. Trong số các bệnh nhân đang điều trị, có 8 trường hợp nặng và nguy kịch, trong đó 5 người phải thở máy xâm nhập, hai người can thiệp ECMO. Hầu hết bệnh nhân nặng đều lây nhiễm cộng đồng, có nguồn gốc từ ổ dịch Đà Nẵng.', 
+            question: 'Số bệnh nhân đã khỏi bệnh trong cả nước là bao nhiêu?'
+        }, 
+        label: 'Số bệnh nhân đã khỏi bệnh trong cả nước là bao nhiêu?' 
+    },
+    { 
+        value: {
+            context: '6 người ở Bệnh viện Phổi Đà Nẵng gồm các số 871, 863, 850, 891, 482, 817; Bệnh viện Dã chiến Hòa Vang, có 5 bệnh nhân số 478, 725, 760, 942, 1024, khỏi Covid-19.  Trong quá trình điều trị, họ xét nghiệm âm tính nCoV ba lần trở lên. Sau khỏi Covid-19, họ tiếp tục được theo dõi sức khỏe trong 14 ngày. Như vậy tổng số người khỏi bệnh cả nước lên 746. Chiều nay, Bộ Y tế thông báo "bệnh nhân 764", nam, 76 tuổi, ở Đà Nẵng, xét nghiệm ba lần âm tính với nCoV, tử vong do biến chứng bệnh nền nặng. Ca tử vong này không ghi nhận là do Covid-19. Tổng số ca nhiễm từ đầu dịch là 1.044, số người tử vong do Covid-19 là 34. Những người tử vong tuổi từ 33 đến 93, trong đó 21 người mắc bệnh lý nền suy thận mạn. Trong số các bệnh nhân đang điều trị, có 8 trường hợp nặng và nguy kịch, trong đó 5 người phải thở máy xâm nhập, hai người can thiệp ECMO. Hầu hết bệnh nhân nặng đều lây nhiễm cộng đồng, có nguồn gốc từ ổ dịch Đà Nẵng.', 
+            question: 'Những bệnh nhân đã khỏi bệnh ở Đà Nẵng là những bệnh nhân nào?'
+        }, 
+        label: 'Những bệnh nhân đã khỏi bệnh ở Đà Nẵng là những bệnh nhân nào?' 
+    }
+];
 
 
 class Demo extends Component {
