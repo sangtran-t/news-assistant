@@ -197,7 +197,7 @@ class Assistant extends Component {
         };
         const parts = text.split(new RegExp(`(${escapeRegExp(highlight)})`, 'gi'));
         return(
-            <span>
+            <span style={{ fontSize: 'medium'}}>
                 {parts.map((part, i) =>
                     <span key={i} style={part === highlight && i < 2 ?
                         { fontWeight: 'bold', backgroundColor: 'aqua', borderRadius: '5px' } : {}}>
@@ -242,7 +242,7 @@ class Assistant extends Component {
                                                 </animateTransform>
                                             </g>
                                         </svg>)}
-                            <input autoFocus value={this.state.question} onChange={event => {
+                            <input spellCheck="false" autoFocus value={this.state.question} onChange={event => {
                                 this.setState({
                                     question: event.target.value,
                                 })

@@ -82,6 +82,7 @@ body {
 .detail-contents {
   /* height: 64vh; */
   height: 55vh;
+  font-size: medium;
 }
 
 
@@ -274,4 +275,8 @@ legend {
 
 #okbtn:hover{
   cursor: pointer;
+}
+
+textarea, input {
+  font-size: unset;
 }

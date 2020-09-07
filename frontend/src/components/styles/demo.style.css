@@ -81,6 +81,7 @@
     border-radius: 6px;
     height: 45vh;
     text-align: justify;
+    line-height: 1.4;
 }
 
 #demo-result > div:last-child {
@@ -155,6 +156,7 @@
 }
 
 #demo-answer {
+    font-weight: bold;
     font-size: medium;
     background-color: white;
     box-shadow: none;
@@ -165,6 +167,7 @@
     padding: 10px;
     font-family: Quicksand;
     overflow: auto;
+    color: red;
 }
 
 #status img {
