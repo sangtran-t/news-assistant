@@ -1,2 +1,2 @@
 # News Assistant
-A assistant for reading news
+An assistant for reading news
